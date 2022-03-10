@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -24,6 +24,7 @@ Route::get('/home', 'DashboardController@index')->middleware('auth');
 Route::get('/', 'DashboardController@index')->name('home')->middleware('auth');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@index']);
+	Route::resource('athletes', 'AthleteController');
 	Route::resource('users', 'UserController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
