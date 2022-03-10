@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <nav aria-label="breadcrumb" role="navigation">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">{{ __('Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="/">{{ __('Dashboard') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Store Credit') }}</li>
           </ol>
         </nav>

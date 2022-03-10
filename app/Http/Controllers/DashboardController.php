@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Athlete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class DashboardController extends Controller
     public function index()
     {
         $title = "Dashboard";
-        return view('admin.dashboard', compact('title'));
+        $athletes = Athlete::select('id')->get()->count();
+        return view('admin.dashboard', compact('title', 'athletes'));
     }
 
     /**
