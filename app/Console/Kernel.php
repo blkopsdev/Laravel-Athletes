@@ -15,7 +15,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        CheckStoreCredit::class,
         DatabaseBackUp::class
     ];
 
@@ -27,7 +26,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check-store-credit:run')->hourly();
         $schedule->command('database:backup')->daily();
     }
 
