@@ -57,13 +57,13 @@
               <div class="row">
                 <label class="col-sm-2 col-form-label">{{ __('User Type') }}</label>
                 <div class="col-sm-7">
-                  <div class="form-group{{ $errors->has('user_type') ? ' has-danger' : '' }}">
-                    <select class="selectpicker form-control user-type" id="user_type" name="user_type" data-style="btn btn-primary text-white">
+                  <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                    <select class="selectpicker form-control role" id="role" name="role" data-style="btn btn-primary text-white">
                       <option value="admin">{{ __('Admin') }}</option>
                       <option value="employee">{{ __('Employee') }}</option>
                     </select>
-                    @if ($errors->has('user_type'))
-                      <span id="user-type-error" class="error text-danger" for="input-user-type">{{ $errors->first('user_type') }}</span>
+                    @if ($errors->has('role'))
+                      <span id="role-error" class="error text-danger" for="input-role">{{ $errors->first('role') }}</span>
                     @endif
                   </div>
                 </div>

@@ -31,7 +31,7 @@
 									<tr>
 										<td>{{$user->name}}</td>
 										<td>{{$user->email}}</td>
-										<td>{{ ucfirst($user->user_type) }}</td>
+										<td>{{ ucfirst($user->role) }}</td>
 										<td>{{date('m/d/Y', strtotime($user->created_at))}}</td>
 										<td class="td-actions text-right d-flex">
 											<a rel="tooltip" class="btn btn-success btn-link" href="{{route('users.edit', $user->id)}}"

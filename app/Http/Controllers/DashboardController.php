@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
-use App\Option;
-use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,12 +26,7 @@ class DashboardController extends Controller
     public function index()
     {
         $title = "Dashboard";
-        $customers = Customer::get();
-        $transactions = Transaction::get();
-        $today_transactions = Transaction::whereDate('created_at', Carbon::today())->get();
-        $new_trans = Transaction::latest()->take(10)->get();
-        // $projects = Project::get();
-        return view('dashboard', compact('title', 'customers', 'transactions', 'today_transactions', 'new_trans'));
+        return view('dashboard', compact('title'));
     }
 
     /**

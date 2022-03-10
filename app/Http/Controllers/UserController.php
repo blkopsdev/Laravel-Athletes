@@ -38,7 +38,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' => $request->user_type
+            'role' => $request->role
         ];
         User::create($data);
         return redirect()->route('users.index')->with('success', "User created successfully.");
@@ -65,7 +65,7 @@ class UserController extends Controller
         $data = [
             'name'      => $request->name,
             'email'     => $request->email,
-            'user_type' => $request->user_type
+            'role' => $request->role
         ];
         $user->update($data);
         return back()->with('success', 'User updated successfully');

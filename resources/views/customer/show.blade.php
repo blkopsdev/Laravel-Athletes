@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6 d-flex align-items-center">
           <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-primary btn-rounded ml-3" rel="tooltip" data-original-title="" title="{{ __('Edit') }}"><i class="material-icons mr-2">edit</i>{{ __('Edit') }}</a>
-            @if (auth()->user()->user_type == "admin")
+            @if (auth()->user()->role == "admin")
             <a href="{{ route('merge', $customer->id) }}" class="btn btn-success btn-rounded ml-3" rel="tooltip" data-original-title="" title="{{ __('Merge') }}"><i class="material-icons mr-2">merge</i>{{ __('Merge') }}</a>
             <form action="{{ route('customers.destroy',$customer->id) }}" method="POST" class="mb-1">
               @csrf
@@ -372,7 +372,7 @@
                             <i class="material-icons">visibility</i>
                             <div class="ripple-container"></div>
                           </a>
-                          @if (auth()->user()->user_type == "admin")
+                          @if (auth()->user()->role == "admin")
                           <a rel="tooltip" class="btn btn-warning btn-rounded p-2" href="{{ route('transactions.edit', $transaction->id) }}" data-original-title="" title="{{ __('Edit') }}">
                             <i class="material-icons">edit</i>
                             <div class="ripple-container"></div>

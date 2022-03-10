@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'email', 'title' => __('Boheme Transactions Ledger')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'email', 'title' => __('Recruiting Brain')])
 
 @section('content')
 <div class="container" style="height: auto;">
