@@ -36,4 +36,4 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 		Route::post('settings', ['as'=>'update_settings', 'uses'=>'DashboardController@settingsUpdate']); */
 	});
 });
-// Route::get('customer_ajax', 'CustomerController@customers');
+Route::get('athletes_ajax', 'AthleteController@getAthletes');

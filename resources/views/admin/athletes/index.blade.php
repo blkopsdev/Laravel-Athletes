@@ -28,22 +28,17 @@
               <h4 class="card-title">{{ __('Total Athletes:') }} <strong class="text-primary">{{ number_format($total) }}</strong></h4>
             </div>
             <div class="card-body table-responsive">
-              <table class="table table-hover">
+              <table class="table table-hover" id="athletes">
                 <thead class="text-warning">
                   <th>ID</th>
-                  <th>Created On</th>
-                  <th>Customer</th>
-                  <th>Type</th>
-                  <th>Purchase Subtotal</th>
-                  <th>Tax</th>
-                  <th>Purchase Total</th>
-                  <th>Store Credit</th>
-                  <th>{{ __('Cash In/Out') }}</th>
-                  <th>Credit Balance</th>
-                  <th></th>
+                  <th>Name</th>
+                  <th>City/School</th>
+                  <th>Position</th>
+                  <th>Class</th>
+                  <th>State</th>
+                  <th>Action</th>
                 </thead>
                 <tbody>
-                  
                 </tbody>
               </table>
             </div>
@@ -55,4 +50,37 @@
 @endsection
 
 @push('js')
+<script>
+  $(document).ready(function() {
+    $('#athletes').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ url('athletes_ajax') }}",
+      columns: [
+          {data: 'id', name: 'id'},
+          {data: 'name', name: 'name'},
+          {data: 'city_school', name: 'city_school'},
+          {data: 'position', name: 'position'},
+          {data: 'class', name: 'class'},
+          {data: 'state', name: 'state'},
+          {
+            data: 'action', 
+            name: 'action', 
+            searchable: false,
+            orderable: false
+          },
+      ],
+      "order": [[ 0, "desc" ]]
+    })
+  });
+</script>
+
+<script>
+  @if(session('success'))
+      toastr.success('{{ session('success') }}', '{{ trans('app.success') }}', toastr_options);
+  @endif
+  @if(session('error'))
+      toastr.error('{{ session('error') }}', '{{ trans('app.error') }}', toastr_options);
+  @endif
+</script>
 @endpush

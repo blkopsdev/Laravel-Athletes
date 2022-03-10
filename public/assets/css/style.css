@@ -120,7 +120,7 @@ input:checked+.slider:before {
     display: none;
 }
 
-#customers tbody td:last-child,
+#athletes tbody td:last-child,
 #transactions tbody td:last-child {
     display: flex;
     align-items: center;
