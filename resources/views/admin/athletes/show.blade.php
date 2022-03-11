@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">{{ __('Dashboard') }}</a></li>
               <li class="breadcrumb-item"><a href="{{ route('athletes.index') }}">{{ __('Athletes') }}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{ __('Athlete Detail') }}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ $athlete->name }}</li>
             </ol>
           </nav>
         </div>
@@ -45,8 +45,8 @@
                     @foreach (json_decode(json_encode($athlete)) as $key => $value)
                       @if ($value && $key != 'created_at' && $key != 'updated_at' && $key != 'token')
                         <tr>
-                          <th style="min-width: 200px">{{ ucfirst(str_replace('_', ' ', $key)) }}:</th>
-                          <td>{{ $value }}</td>
+                          <th style="min-width: 200px">{{ ucwords(str_replace('_', ' ', $key)) }}:</th>
+                          <td>{!! $value !!}</td>
                         </tr>
                       @endif
                     @endforeach

@@ -53,7 +53,8 @@ class AthleteController extends Controller
      */
     public function create()
     {
-        //
+        $title = __('Create New Athlete');
+        return view('admin.athletes.create', compact('title'));
     }
 
     /**
@@ -64,7 +65,18 @@ class AthleteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $athlete = new Athlete();
+        
+        $input = $request->all();
+        $input['token'] = bin2hex(openssl_random_pseudo_bytes(16));
+    
+        try {
+            $athlete->create($input);
+            $id = $athlete->id;
+            return redirect()->route('athletes.index')->with('success', 'Athlete has been created successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -88,7 +100,10 @@ class AthleteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = __('Edit Athlete');
+        $athlete = Athlete::find($id);
+
+        return view('admin.athletes.edit', compact('athlete', 'title'));
     }
 
     /**
@@ -100,7 +115,15 @@ class AthleteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $athlete = Athlete::find($id);
+        $input = $request->all();
+
+        try {
+            $athlete->update($input);
+            return redirect()->route('athletes.show', $id)->with('success', 'Athlete has been updated successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -114,6 +137,6 @@ class AthleteController extends Controller
         $athlete = Athlete::find($id);
         $athlete->delete();
 
-        return redirect()->route('athletes.index')->with('success', '');
+        return redirect()->route('athletes.index')->with('success', 'Customer has been deleted successfully!');
     }
 }

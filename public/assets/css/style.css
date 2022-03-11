@@ -130,3 +130,7 @@ input:checked+.slider:before {
 #logo:hover {
     color: #ff9800 !important;
 }
+
+.card .table tr:first-child td {
+    border-top: 1px solid #ddd;
+}
