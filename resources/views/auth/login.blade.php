@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Material Dashboard')])
+@extends('layouts.auth.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Material Dashboard')])
 
 @section('content')
 <div class="container" style="height: auto;">
@@ -8,7 +8,7 @@
         @csrf
 
         <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-warning text-center">
+          <div class="card-header card-header-primary text-center">
             <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>
             {{-- <div class="social-line">
               <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-warning btn-link btn-lg">@lang('auth.login')</button>
+            <button type="submit" class="btn btn-primary btn-link btn-lg">@lang('auth.login')</button>
           </div>
         </div>
       </form>

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => '', 'title' => __('Material Dashboard')])
+@extends('layouts.auth.app', ['class' => 'off-canvas-sidebar', 'activePage' => '', 'title' => __('Material Dashboard')])
 
 @section('content')
 <div class="container" style="height: auto;">
@@ -9,7 +9,7 @@
 
         <input type="hidden" name="token" value="{{ $token }}">
         <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-warning text-center">
+          <div class="card-header card-header-primary text-center">
             <h4 class="card-title"><strong>{{ __('Reset Password') }}</strong></h4>
           </div>
           <div class="card-body ">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-warning btn-link btn-lg">{{ __('Reset Password') }}</button>
+            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Reset Password') }}</button>
           </div>
         </div>
       </form>

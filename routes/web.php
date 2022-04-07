@@ -17,11 +17,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Auth::routes();
 
-Route::get('/home', 'DashboardController@index')->middleware('auth');
-
-Route::get('/', 'DashboardController@index')->name('home')->middleware('auth');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@index']);
 	Route::resource('athletes', 'AthleteController');
