@@ -8,7 +8,11 @@
             <p><strong>{{ __('HOME') }}</strong></p>
           </a>
         </li>
-  
+        <li class="nav-item{{ $activePage == 'contact_us' ? ' active' : '' }}">
+          <a class="nav-link text-primary" href="{{ route('contact') }}">
+            <p><strong>{{ __('CONTACT US') }}</strong></p>
+          </a>
+        </li>
         <li class="nav-item{{ $activePage == 'about_us' ? ' active' : '' }}">
           <a class="nav-link text-primary" href="{{ route('aboutus') }}">
             <p><strong>{{ __('ABOUT US') }}</strong></p>

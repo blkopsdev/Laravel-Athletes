@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\SubmissionType;
+
 class HomeController extends Controller
 {
     /**
@@ -27,6 +29,12 @@ class HomeController extends Controller
     public function about()
     {
         return view('pages.about-us');
+    }
+
+    public function contact()
+    {
+        $submission_types = SubmissionType::all();
+        return view('pages.contact-us', compact('submission_types'));
     }
 
     public function links()
