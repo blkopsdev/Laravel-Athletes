@@ -44,8 +44,6 @@ class DashboardController extends Controller
 
     public function settingsUpdate(Request $request)
     {
-        $request->tax_rate;
-        $request->expiration_period;
         $tax_rate = Option::whereOptionName('tax_rate')->first();
         $expiration_period = Option::whereOptionName('expiration_period')->first();
 
