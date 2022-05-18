@@ -19,6 +19,14 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about-us', 'HomeController@about')->name('aboutus');
+Route::get('/links', 'HomeController@links')->name('links');
+Route::get('/fans', 'HomeController@fans')->name('fans');
+Route::get('/combines', 'HomeController@combines')->name('combines');
+Route::get('/marketing', 'HomeController@marketing')->name('marketing');
+Route::get('/stats', 'HomeController@stats')->name('stats');
+Route::get('/highschools', 'HomeController@highschools')->name('highschools');
+Route::get('/teams', 'HomeController@teams')->name('teams');
+Route::get('/coaches', 'HomeController@coaches')->name('coaches');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');

@@ -28,4 +28,44 @@ class HomeController extends Controller
     {
         return view('pages.about-us');
     }
+
+    public function links()
+    {
+        return view('pages.links');
+    }
+
+    public function fans()
+    {
+        return view('pages.fans');
+    }
+
+    public function combines()
+    {
+        return view('pages.combines');
+    }
+
+    public function marketing()
+    {
+        return view('pages.marketing');
+    }
+
+    public function stats()
+    {
+        return view('pages.stats');
+    }
+
+    public function highschools()
+    {
+        return view('pages.highschools');
+    }
+
+    public function teams()
+    {
+        return view('pages.teams');
+    }
+
+    public function coaches()
+    {
+        return view('pages.coaches');
+    }
 }
