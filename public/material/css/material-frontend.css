@@ -6166,7 +6166,7 @@
   }
   
   .bg-primary {
-    background-color: #2196f3 !important;
+    background-color: #094fa4 !important;
   }
   
   a.bg-primary:hover,
@@ -14472,7 +14472,7 @@
   
   .sidebar {
     position: fixed;
-    top: 65px;
+    top: 50px;
     bottom: 0;
     left: 0;
     z-index: 2;
@@ -14501,7 +14501,7 @@
     position: relative;
     height: calc(100vh - 75px);
     overflow: auto;
-    width: 260px;
+    width: 240px;
     z-index: 4;
     padding-bottom: 30px;
   }
@@ -14589,7 +14589,7 @@
   }
   
   .sidebar .nav li:first-child>a {
-    margin: 0 15px;
+    /* margin: 0 15px; */
   }
   
   .sidebar .nav li:hover>a,
@@ -14649,14 +14649,14 @@
   
   .sidebar .nav li a,
   .sidebar .nav li .dropdown-menu a {
-    margin: 10px 15px 0;
+    /* margin: 10px 15px 0; */
     border-radius: 3px;
     color: #3C4858;
     padding-left: 10px;
     padding-right: 10px;
     text-transform: capitalize;
     font-size: 13px;
-    padding: 10px 15px;
+    padding: 5px 15px;
   }
   
   .sidebar .sidebar-background {
@@ -14788,8 +14788,8 @@
   }
   
   .sidebar[data-color="orange"] li.active>a {
-    background-color: #ff9800;
-    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
+    background-color: #83a5cf;
+    box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(130 165 207);
   }
   
   .sidebar[data-color="danger"] li.active>a {
