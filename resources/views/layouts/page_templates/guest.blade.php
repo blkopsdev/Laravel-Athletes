@@ -2,7 +2,7 @@
   @include('layouts.navbars.navs.guest')
   <div class="main-panel">
     @include('flash_msg')
-    @include('layouts.navbars.sidebar')
+    @include('layouts.navbars.sidebar-frontend')
     @yield('content')
     @include('layouts.footers.guest')
   </div>
