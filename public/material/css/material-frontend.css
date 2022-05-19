@@ -16364,6 +16364,10 @@ label {
   transition: all 150ms ease 0s;
 }
 
+.card-collapse .card-header a i, .navbar {
+  transition: all .15s ease 0s;
+}
+
 .caret,
 .sidebar a {
   -webkit-transition: all 150ms ease-in;
@@ -17277,7 +17281,49 @@ label {
 }
 
 .card-collapse {
-  margin-bottom: 15px;
+  margin: 0;
+}
+
+.card-collapse, .card-collapse .card-header {
+  box-shadow: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.card-collapse .card-header {
+  border-bottom: 1px solid #ddd;
+  padding: 25px 10px 5px 0;
+  margin: 0;
+  box-shadow: none!important;
+  background: #fff;
+}
+
+.card-collapse .card-header a {
+  color: #3c4858;
+  font-size: .9375rem;
+  display: block;
+}
+
+.card-collapse .card-header a[aria-expanded=true] i {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  transform: rotate(180deg);
+}
+
+.collapse {
+  display: none;
+}
+
+.collapse.show {
+  display: block;
+}
+
+.card-collapse .card-body {
+  padding: 15px 0 5px;
+  position: relative;
+}
+.card-collapse .card-header a i {
+  float: right;
+  position: relative;
 }
 
 .card-collapse .card .card-header a[aria-expanded="true"] {
