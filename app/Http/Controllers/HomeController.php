@@ -37,6 +37,11 @@ class HomeController extends Controller
         return view('pages.contact-us', compact('submission_types'));
     }
 
+    public function faq()
+    {
+        return view('pages.faq');
+    }
+
     public function links()
     {
         return view('pages.links');

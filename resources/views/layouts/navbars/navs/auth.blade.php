@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-fixed fixed-top ">
+<nav class="navbar navbar-expand-lg navbar-fixed fixed-top bg-primary">
   <div class="container-fluid">
     <div class="col-md-6">
       <a href="/" class="h3 text-warning" id="logo"><img src="{{ asset('assets/img/Logo.png') }}" alt="" height="50" class="mr-3"></a>

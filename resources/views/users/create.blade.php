@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'create_user', 'titlePage' => __('User Create')])
+@extends('layouts.auth.app', ['activePage' => 'create_user', 'titlePage' => __('User Create')])
 
 @section('content')
 <div class="content">

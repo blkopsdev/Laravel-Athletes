@@ -13165,7 +13165,7 @@ fieldset[disabled] .form-group .form-control {
 .navbar.bg-primary {
   color: #fff;
   background-color: #094fa4 !important;
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(156, 39, 176, 0.46);
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #608fc9;
 }
 
 .navbar.bg-primary .dropdown-item:hover,
@@ -14787,9 +14787,9 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
 }
 
-.sidebar[data-color="orange"] li.active>a {
-  background-color: #ff9800;
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
+.sidebar[data-color="primary"] li.active>a {
+  background-color: #094fa4;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #608fc9;
 }
 
 .sidebar[data-color="danger"] li.active>a {
@@ -15118,7 +15118,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   background-color: #18ce0f;
 }
 
-.fixed-plugin .badge-orange {
+.fixed-plugin .badge-primary {
   background-color: #f96332;
 }
 
