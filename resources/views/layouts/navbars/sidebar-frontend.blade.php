@@ -8,6 +8,11 @@
             <p><strong>{{ __('HOME') }}</strong></p>
           </a>
         </li>
+        <li class="nav-item{{ $activePage == 'subscribe' ? ' active' : '' }}">
+          <a class="nav-link text-primary" href="{{ route('subscribes.create') }}">
+            <p><strong>{{ __('SUBSCRIBE') }}</strong></p>
+          </a>
+        </li>
         <li class="nav-item{{ $activePage == 'contact_us' ? ' active' : '' }}">
           <a class="nav-link text-primary" href="{{ route('contact') }}">
             <p><strong>{{ __('CONTACT US') }}</strong></p>

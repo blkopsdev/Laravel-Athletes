@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
+use App\State;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -23,7 +25,9 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::all();
+        $states = State::all();
+        return view('pages.subscription', compact('countries', 'states'));
     }
 
     /**
