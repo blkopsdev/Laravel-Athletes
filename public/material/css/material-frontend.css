@@ -17292,7 +17292,7 @@ label {
 
 .card-collapse .card-header {
   border-bottom: 1px solid #ddd;
-  padding: 25px 10px 5px 0;
+  padding: 15px 10px 15px 0;
   margin: 0;
   box-shadow: none!important;
   background: #fff;
@@ -17317,6 +17317,13 @@ label {
   display: block;
 }
 
+.card-collapse .collapse.show {
+  border-bottom: 1px solid #dddddd;
+}
+
+.card-collapse .collapse.show:last-child {
+  border-bottom: unset;
+}
 .card-collapse .card-body {
   padding: 15px 0 5px;
   position: relative;

@@ -3,7 +3,11 @@
     <div class="premium-services">
       <h4 class="pl-2 py-1 bg-primary text-white"><strong><i>PREMIUM SERVICES</i></strong></h4>
       <ul class="nav mt-0">
-        
+        <li class="nav-item{{ $activePage == 'database_filter' ? ' active' : '' }}">
+          <a class="nav-link text-primary" href="{{ route('database_filter') }}">
+            <p><strong>{{ __('DATABASE') }}</strong></p>
+          </a>
+        </li>
         <li class="nav-item{{ $activePage == 'faq' ? ' active' : '' }}">
           <a class="nav-link text-primary" href="{{ route('faq') }}">
             <p><strong>{{ __('PREMIUM FAQ') }}</strong></p>

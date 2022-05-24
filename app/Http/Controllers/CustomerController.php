@@ -6,7 +6,7 @@ use App\Country;
 use App\State;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.

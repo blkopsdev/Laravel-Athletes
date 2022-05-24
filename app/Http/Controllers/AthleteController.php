@@ -127,6 +127,19 @@ class AthleteController extends Controller
     }
 
     /**
+     * Display the Athlete Database to Customers.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showFilter()
+    {
+        $states = Athlete::select('state')->distinct()->get();
+        $cities = Athlete::select('city_school')->distinct()->get();
+        return view('pages.database-filter', compact('states', 'cities'));
+    }
+    
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
