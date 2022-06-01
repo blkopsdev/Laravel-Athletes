@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Country;
 use App\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -15,7 +16,29 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('home');
+    }
+
+    public function login()
+    {
+        return view('customer.auth.login');
+    }
+
+    public function handleLogin(Request $req)
+    {
+        if(Auth::guard('customer')->attempt($req->only(['email', 'password'])))
+        {
+            return redirect()->route('home');
+        }
+
+        return redirect()->back()->with('error', 'Invalid Credentials');
+    }
+
+    public function logout()
+    {
+        Auth::guard('customer')->logout();
+
+        return redirect()->route('home');
     }
 
     /**

@@ -18,9 +18,16 @@
           </a>
         </li> --}}
         <li class="nav-item{{ $activePage == 'login' ? ' active' : '' }}">
-          <a href="{{ route('login') }}" class="nav-link">
+          @if (!Auth::guard('customer')->check())
+          <a href="{{ route('premium.login') }}" class="nav-link">
             <i class="material-icons">fingerprint</i> {{ __('Login') }}
           </a>
+          @else
+          <a href="{{ route('premium.logout') }}" class="nav-link">
+            <i class="material-icons">fingerprint</i> {{ __('Logout') }}
+          </a>
+          @endif
+          
         </li>
       </ul>
     </div>

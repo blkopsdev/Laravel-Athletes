@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class OnlyAdminAccess
+class PremiumAccess
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,9 @@ class OnlyAdminAccess
      */
     public function handle($request, Closure $next)
     {
-        if ( !Auth::check()){
-            return redirect()->guest(route('login'))->with('error', trans('app.unauthorized_access'));
+        if ( !Auth::guard('customer')->check()){
+            return redirect()->guest(route('premium.login'))->with('error', trans('app.unauthorized_access'));
         }
-
-        $user = Auth::user();
-
-        if (!$user->is_admin())
-            return redirect(route('dashboard'))->with('error', trans('app.access_restricted'));
 
         return $next($request);
     }

@@ -30,9 +30,16 @@ Route::get('/stats', 'HomeController@stats')->name('stats');
 Route::get('/highschools', 'HomeController@highschools')->name('highschools');
 Route::get('/teams', 'HomeController@teams')->name('teams');
 Route::get('/coaches', 'HomeController@coaches')->name('coaches');
-Route::get('/faq', 'HomeController@faq')->name('faq');
-Route::get('/database', 'AthleteController@showFilter')->name('database_filter');    
 Auth::routes();
+Route::group(['prefix' => 'premium', 'middleware' => 'premium_access'], function() {
+	Route::get('/faq', 'HomeController@faq')->name('faq');
+	Route::get('/database', 'AthleteController@showFilter')->name('database_filter');
+});
+Route::get('premium/', 'CustomerController@index')->name('premium.home');
+Route::get('premium/login', 'CustomerController@login')->name('premium.login');
+Route::post('premium/login', 'CustomerController@handleLogin')->name('premium.handleLogin');
+Route::get('premium/logout', 'CustomerController@logout')->name('premium.logout');
+// Route::get('premium/password/reset', '')->name('premium.password.request');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
