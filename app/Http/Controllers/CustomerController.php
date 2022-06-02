@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
-use App\State;
+use App\Models\Country;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

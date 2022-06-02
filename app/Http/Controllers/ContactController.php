@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
-use App\SubmissionType;
+use App\Models\Contact;
+use App\Models\SubmissionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

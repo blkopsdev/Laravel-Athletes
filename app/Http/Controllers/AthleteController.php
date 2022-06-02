@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Athlete;
+use App\Models\Athlete;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use DB;

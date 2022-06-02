@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Athlete;
+use App\Models\Athlete;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

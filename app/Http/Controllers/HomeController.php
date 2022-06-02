@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SubmissionType;
+use App\Models\SubmissionType;
 
 class HomeController extends Controller
 {

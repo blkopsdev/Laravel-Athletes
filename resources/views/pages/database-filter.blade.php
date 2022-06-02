@@ -142,30 +142,30 @@ Brain - Database')])
 <script>
     $(document).ready(function() {
         $('#report_type').on('change', function(e) {
-            $('#submit').removeClass('hide');
+            
             var type = $(this).val();
             var filters = Array();
 
             switch (type) {
-                case 1:
+                case '1':
                     filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
                     break;
-                case 2:
+                case '2':
                     filters = Array('filterState', 'filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
                     break;
-                case 3:
+                case '3':
                     filters = Array('filterState', 'filterClass', 'filterAthlete');
                     break;
-                case 4:
+                case '4':
                     filters = Array('filterState', 'filterCityschool', 'filterClass', 'filterAthlete');
                     break;
-                case 5:
+                case '5':
                     filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
                     break;
-                case 6:
+                case '6':
                     filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
                     break;
-                case 7:
+                case '7':
                     filters = Array('filterState', 'filterCityschool', 'filterClass','filterRating', 'filterAthlete');
                     break;
             }
@@ -181,6 +181,8 @@ Brain - Database')])
                     $('#' + element).addClass('show');
                 }
             }
+
+            $('#submit').removeClass('hide');
         });
     });
 </script>    
