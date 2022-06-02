@@ -13,7 +13,7 @@ Brain - Database')])
             <div class="col-md-8">
                 <form method="post" action="{{ route('contact_post') }}" autocomplete="off" class="form-horizontal">
                     @csrf
-                    <div class="row">
+                    <div class="row" id="selectReport">
                         <div class="col-sm-7">
                             <div class="form-group{{ $errors->has('report_type') ? ' has-danger' : '' }}">
                                 <label for="report_type">Select your report from the dropdown box below.</label>
@@ -35,9 +35,9 @@ Brain - Database')])
                             </div>
                         </div>
                     </div>
-                    <div class="row hide">
+                    <div class="row">
                         <div class="col-sm-7">
-                            <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }} hide" id="filterState">
                                 <select class="selectpicker form-control" id="state" name="state"
                                     data-style="btn btn-primary text-white" required>
                                     <option value="">Select State</option>
@@ -51,7 +51,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('city_school') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('city_school') ? ' has-danger' : '' }} hide" id="filterCityschool">
                                 <select class="selectpicker form-control" id="city_school" name="city_school"
                                     data-style="btn btn-primary text-white" required>
                                     <option value="">Select City/School</option>
@@ -65,7 +65,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('class') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('class') ? ' has-danger' : '' }} hide" id="filterClass">
                                 <select class="selectpicker form-control" id="class" name="class"
                                     data-style="btn btn-primary text-white" required>
                                     <option value="">Select Class</option>
@@ -78,7 +78,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('position') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('position') ? ' has-danger' : '' }} hide" id="filterPosition">
                                 <select class="selectpicker form-control" id="position" name="position"
                                     data-style="btn btn-primary text-white" required>
                                     <option value="">Projected College Position</option>
@@ -99,7 +99,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('rating') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('rating') ? ' has-danger' : '' }} hide" id="filterRating">
                                 <select class="selectpicker form-control" id="rating" name="rating"
                                     data-style="btn btn-primary text-white" required>
                                     <option value="">Select Rating</option>
@@ -116,7 +116,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }} hide" id="filterAthlete">
                                 <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
                                     id="input-name" type="text" placeholder="Type in the full or partial name of an athlete" value="{{ old('name') }}"
                                     required="true" aria-required="true" />
@@ -126,7 +126,7 @@ Brain - Database')])
                                 @endif
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group hide" id="submit">
                                 <button type="submit" class="btn btn-primary">Send Inquiry</button>
                             </div>
                         </div>
@@ -138,3 +138,50 @@ Brain - Database')])
     </div>
 </div>
 @endsection
+@push('js')
+<script>
+    $(document).ready(function() {
+        $('#report_type').on('change', function(e) {
+            $('#submit').removeClass('hide');
+            var type = $(this).val();
+            var filters = Array();
+
+            switch (type) {
+                case 1:
+                    filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
+                    break;
+                case 2:
+                    filters = Array('filterState', 'filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
+                    break;
+                case 3:
+                    filters = Array('filterState', 'filterClass', 'filterAthlete');
+                    break;
+                case 4:
+                    filters = Array('filterState', 'filterCityschool', 'filterClass', 'filterAthlete');
+                    break;
+                case 5:
+                    filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
+                    break;
+                case 6:
+                    filters = Array('filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
+                    break;
+                case 7:
+                    filters = Array('filterState', 'filterCityschool', 'filterClass','filterRating', 'filterAthlete');
+                    break;
+            }
+            
+            var elements = Array('filterState', 'filterCityschool', 'filterClass', 'filterPosition', 'filterRating', 'filterAthlete');
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                if (filters.includes(element)) {
+                    $('#' + element).addClass('show');
+                    $('#' + element).removeClass('hide');
+                } else {
+                    $('#' + element).addClass('hide');
+                    $('#' + element).addClass('show');
+                }
+            }
+        });
+    });
+</script>    
+@endpush

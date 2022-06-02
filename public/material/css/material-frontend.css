@@ -18918,3 +18918,15 @@ Copyright (c) 2015 Daniel Eden
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+.login-page.container {
+  margin: 0 150px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

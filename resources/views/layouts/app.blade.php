@@ -38,7 +38,7 @@
         <script src="{{ asset('material') }}/js/core/popper.min.js"></script>
 
         <script src="{{ asset('material') }}/js/material-modal.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> --}}
         <script src="{{ asset('material') }}/js/core/bootstrap-material-design.min.js"></script>
         <script src="{{ asset('material') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
         <!-- Plugin for the momentJs  -->
@@ -52,7 +52,7 @@
         <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
         <script src="{{ asset('material') }}/js/plugins/bootstrap-selectpicker.js"></script>
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> --}}
         <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
         <script src="{{ asset('material') }}/js/plugins/bootstrap-datetimepicker.min.js"></script>
         <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
@@ -66,25 +66,20 @@
         <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
         <script src="{{ asset('material') }}/js/plugins/jquery-jvectormap.js"></script>
         <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-        <script src="{{ asset('material') }}/js/plugins/nouislider.min.js"></script>
+        {{-- <script src="{{ asset('material') }}/js/plugins/nouislider.min.js"></script> --}}
         <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
         {{-- <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script> --}}
 
         <!-- Library for adding dinamically elements -->
         <script src="{{ asset('material') }}/js/plugins/arrive.min.js"></script>
-        <!--  Google Maps Plugin    -->
-        <!-- Chartist JS -->
-        {{-- <script src="{{ asset('material') }}/js/plugins/chartist.min.js"></script> --}}
-        <!--  Notifications Plugin    -->
+        
         <script src="{{ asset('material') }}/js/plugins/bootstrap-notify.js"></script>
         <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="{{ asset('material') }}/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
-        <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-        <script src="{{ asset('material') }}/demo/demo.js"></script>
-        <script src="{{ asset('material') }}/js/settings.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
         <script>
             var toastr_options = {closeButton : true};
         </script>
