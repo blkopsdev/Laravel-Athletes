@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class StateAccess extends Model
 {
-    //
+    protected $guarded = [];
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Athlete;
+use App\Models\StateAccess;
+use App\Models\ClassAccess;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class AthleteController extends Controller
@@ -134,9 +137,35 @@ class AthleteController extends Controller
      */
     public function showFilter()
     {
-        $states = Athlete::select('state')->distinct()->get();
+        $user = Auth::guard('customer')->user();
         $cities = Athlete::select('city_school')->distinct()->get();
-        return view('pages.database-filter', compact('states', 'cities'));
+
+        $state_accesses = StateAccess::select('state_access')->whereCustomerId($user->id)->first();
+        if($state_accesses) {
+            $states = Athlete::select('state')->whereIn('state', json_decode($state_accesses->state_access))->distinct()->get();
+        } else {
+            $states = Athlete::select('state')->distinct()->get();
+        }
+
+        $class_accesses = ClassAccess::select('class_access')->whereCustomerId($user->id)->first();
+                if($class_accesses) {
+            $classes = Athlete::select('class')->whereIn('class', json_decode($class_accesses->class_access))->distinct()->get();
+        } else {
+            $classes = Athlete::select('class')->distinct()->get();
+        }
+
+        return view('pages.database-filter', compact('states', 'cities', 'classes'));
+    }
+    
+    public function report(Request $request)
+    {
+        $report = $request->report;
+        $state = $request->state;
+        $city_school = $request->city_school;
+        $class = $request->class;
+        $position = $request->position;
+        $rating = $request->rating;
+        $name = $request->name;
     }
     
     /**

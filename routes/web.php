@@ -37,6 +37,7 @@ Route::group(['prefix' => 'premium'], function() {
 	Route::group(['middleware' => 'premium_access'], function() {
 		Route::get('/faq', 'HomeController@faq')->name('faq');
 		Route::get('/database', 'AthleteController@showFilter')->name('database_filter');
+		Route::post('/athlete-report', 'AthleteController@report')->name('athlete_report');
 	});
 	
 	Route::get('login', 'CustomerController@login')->name('premium.login');
