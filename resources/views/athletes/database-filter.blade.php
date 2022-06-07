@@ -11,7 +11,7 @@ Brain - Database')])
         </div>
         <div class="row">
             <div class="col-md-8">
-                <form method="post" action="{{ route('athlete_report') }}" autocomplete="off" class="form-horizontal">
+                <form method="get" action="{{ route('athlete_report') }}" autocomplete="off" class="form-horizontal">
                     @csrf
                     <div class="row" id="selectReport">
                         <div class="col-sm-7">

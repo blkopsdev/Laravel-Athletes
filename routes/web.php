@@ -37,7 +37,8 @@ Route::group(['prefix' => 'premium'], function() {
 	Route::group(['middleware' => 'premium_access'], function() {
 		Route::get('/faq', 'HomeController@faq')->name('faq');
 		Route::get('/database', 'AthleteController@showFilter')->name('database_filter');
-		Route::post('/athlete-report', 'AthleteController@report')->name('athlete_report');
+		Route::get('/athlete-report', 'AthleteController@report')->name('athlete_report');
+		Route::get('/athlete/{id}', 'AthleteController@showAthlete')->name('athlete.premium_show');
 	});
 	
 	Route::get('login', 'CustomerController@login')->name('premium.login');
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'premium'], function() {
 	Route::get('logout', 'CustomerController@logout')->name('premium.logout');
 });
 
-// Route::get('premium/password/reset', '')->name('premium.password.request');
+// Route::get('premium/password/reset', 'Customer/ForgetPasswordController@')->name('premium.password.request');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('admin_access');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
@@ -63,3 +64,4 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	}); */
 });
 Route::get('athletes_ajax', 'AthleteController@getAthletes');
+Route::get('athletes_report_ajax', 'AthleteController@getReport');

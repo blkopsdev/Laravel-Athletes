@@ -137,8 +137,8 @@ class AthleteController extends Controller
      */
     public function showFilter()
     {
-        $user = Auth::guard('customer')->user();
         $cities = Athlete::select('city_school')->distinct()->get();
+        $user = Auth::guard('customer')->user();
 
         $state_accesses = StateAccess::select('state_access')->whereCustomerId($user->id)->first();
         if($state_accesses) {
@@ -154,20 +154,114 @@ class AthleteController extends Controller
             $classes = Athlete::select('class')->distinct()->get();
         }
 
-        return view('pages.database-filter', compact('states', 'cities', 'classes'));
+        return view('athletes.database-filter', compact('states', 'cities', 'classes'));
     }
     
     public function report(Request $request)
     {
-        $report = $request->report;
-        $state = $request->state;
-        $city_school = $request->city_school;
-        $class = $request->class;
-        $position = $request->position;
-        $rating = $request->rating;
-        $name = $request->name;
+        $data = [
+            "report" => $request->report_type,
+            "state" => $request->state,
+            "city_school" => $request->city_school,
+            "city_school_search" => $request->city_school_search,
+            "class" => $request->class,
+            "position" => $request->position,
+            "rating" => $request->rating,
+            "name" => $request->name
+        ];
+
+        switch ($request->report_type) {
+            case '1':
+                $title = "National Position Rankings";
+                break;
+            case '2':
+                $title = "State Position Rankings";
+                break;
+            case '3':
+                $title = "State Overall Rankings";
+                break;
+            case '4':
+                $title = "State By City/School";
+                break;
+            case '5':
+                $title = "National Commitments";
+                break;
+            case '6':
+                $title = "National Top Offers";
+                break;
+            case '7':
+                $title = "Contacts Report";
+                break;
+        }
+        
+        return view('athletes.athlete-table', compact('data', 'title'));
     }
     
+    public function getReport(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Athlete::query();
+
+            if($request->report == 5 || $request->report == 7) {
+                $data->where('college_commitment', '!=', '');
+            } 
+            if($request->report == 6) {
+                $data->where('top_offers', '!=', '')->where('top_offers', '!=', 'x');
+            }
+            if($request->state != null) {
+                $data->whereState($request->state);
+            }
+            if($request->city_school != null) {
+                $data->whereCitySchool($request->city_school);
+            }
+            if($request->city_school_search != null) {
+                $data->where('city_school_search', 'LIKE', '% { ' . $request->city_school_search . '} %');
+            }
+
+            if($request->class != null && $request->class != 'All') {
+                $data->whereClass($request->class);
+            }
+            if($request->position != null) {
+                $data->where('projected_college_position', '=', $request->position);
+            }
+            if($request->rating != null && $request->rating != 'All') {
+                $data->whereRating($request->rating);
+            }
+            if($request->name != null) {
+                $data->where('name', 'LIKE', '% { ' . $request->name . '} %');
+            }
+
+            $user = Auth::guard('customer')->user();
+
+            $state_accesses = StateAccess::select('state_access')->whereCustomerId($user->id)->first();
+            if($state_accesses) {
+                $data->whereIn('state', json_decode($state_accesses->state_access));
+            }
+
+            $class_accesses = ClassAccess::select('class_access')->whereCustomerId($user->id)->first();
+            if($class_accesses) {
+                $data->whereIn('class', json_decode($class_accesses->class_access));
+            } 
+
+            $data->latest()->get();
+            // $data = DB::table('athletes')->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('athlete_name', function($row){
+                    $actions = 
+                        '<a href="' . route('athlete.premium_show', $row->id) . '" class="" target="_blank">' . $row->name . '</a>';
+                    return $actions;
+                })
+                ->rawColumns(['athlete_name'])
+                ->make(true);
+        }
+    }
+
+    public function showAthlete($id) 
+    {
+        $athlete = Athlete::find($id);
+        return view('athletes.show', compact('athlete'));
+    }
     /**
      * Remove the specified resource from storage.
      *
