@@ -14,7 +14,7 @@
 
           <p>Please enter your information below to register for access to special features on this website.</p>
 
-          <form method="post" action="{{ route('contact_post') }}" autocomplete="off" class="form-horizontal">
+          <form method="post" action="{{ route('subscribes.store') }}" autocomplete="off" class="form-horizontal">
             @csrf
             <div class="row">
               <div class="col-sm-7">
@@ -58,10 +58,10 @@
             </div>
             <div class="row">
               <div class="col-sm-7">
-                <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
-                  <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" id="input-address" type="text" placeholder="Street Address" value="{{ old('address') }}" required />
-                  @if ($errors->has('address'))
-                    <span id="address-error" class="error text-danger" for="input-address">{{ $errors->first('address') }}</span>
+                <div class="form-group{{ $errors->has('street') ? ' has-danger' : '' }}">
+                  <input class="form-control{{ $errors->has('street') ? ' is-invalid' : '' }}" name="street" id="input-street" type="text" placeholder="Street Address" value="{{ old('street') }}" required />
+                  @if ($errors->has('street'))
+                    <span id="street-error" class="error text-danger" for="input-street">{{ $errors->first('street') }}</span>
                   @endif
                 </div>
               </div>
@@ -79,7 +79,7 @@
             <div class="row">
               <div class="col-sm-7">
                 <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                  <select class="selectpicker form-control" id="state" name="state" data-style="btn btn-primary text-white" required>
+                  <select class="selectpicker form-control" id="state" name="state" data-style="btn btn-primary text-white">
                     <option value="">Select State</option>
                     @foreach ($states as $state)
                     <option value="{{ $state->state }}" {{ old('state') == $state->state ? 'selected' : '' }}>{{ $state->state }}</option>
@@ -93,10 +93,10 @@
             </div>
             <div class="row">
               <div class="col-sm-7">
-                <div class="form-group{{ $errors->has('state_alternative') ? ' has-danger' : '' }}">
-                  <input class="form-control{{ $errors->has('state_alternative') ? ' is-invalid' : '' }}" name="state_alternative" id="input-state-alternative" type="text" placeholder="State Alternative" value="{{ old('state_alternative') }}" required />
-                  @if ($errors->has('state_alternative'))
-                    <span id="state-alternative-error" class="error text-danger" for="input-state-alternative">{{ $errors->first('state_alternative') }}</span>
+                <div class="form-group{{ $errors->has('state_alt') ? ' has-danger' : '' }}">
+                  <input class="form-control{{ $errors->has('state_alt') ? ' is-invalid' : '' }}" name="state_alt" id="input-state-alt" type="text" placeholder="State Alternative" value="{{ old('state_alt') }}"/>
+                  @if ($errors->has('state_alt'))
+                    <span id="state-alt-error" class="error text-danger" for="input-state-alt">{{ $errors->first('state_alt') }}</span>
                   @endif
                 </div>
               </div>
@@ -106,7 +106,7 @@
                 <div class="form-group{{ $errors->has('country') ? ' has-danger' : '' }}">
                   <select class="selectpicker form-control" id="country" name="country" data-style="btn btn-primary text-white" required>
                     <option value="">Select country</option>
-                    <option value="United State">United State</option>
+                    <option value="United State" {{ old('country') == 'United State' ? 'selected' : '' }}>United State</option>
                     @foreach ($countries as $country)
                     <option value="{{ $country->country }}" {{ old('country') == $country->country ? 'selected' : '' }}>{{ $country->country }}</option>
                     @endforeach
@@ -119,10 +119,10 @@
             </div>
             <div class="row mb-5">
               <div class="col-sm-7">
-                <div class="form-group{{ $errors->has('zipcode') ? ' has-danger' : '' }}">
-                  <input class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}" name="zipcode" id="input-zipcode" type="text" placeholder="Zip/Postal Code" value="{{ old('zipcode') }}" required />
-                  @if ($errors->has('zipcode'))
-                    <span id="zipcode-error" class="error text-danger" for="input-zipcode">{{ $errors->first('zipcode') }}</span>
+                <div class="form-group{{ $errors->has('zip') ? ' has-danger' : '' }}">
+                  <input class="form-control{{ $errors->has('zip') ? ' is-invalid' : '' }}" name="zip" id="input-zip" type="text" placeholder="Zip/Postal Code" value="{{ old('zip') }}" required />
+                  @if ($errors->has('zip'))
+                    <span id="zip-error" class="error text-danger" for="input-zip">{{ $errors->first('zip') }}</span>
                   @endif
                 </div>
               </div>
@@ -152,10 +152,10 @@
 
             <div class="row">
               <div class="col-sm-7">
-                <div class="form-group{{ $errors->has('confirm_password') ? ' has-danger' : '' }}">
-                  <input class="form-control{{ $errors->has('confirm_password') ? ' is-invalid' : '' }}" name="confirm_password" id="input-confirm-password" type="password" placeholder="Verify Password" value="{{ old('confirm_password') }}" required />
-                  @if ($errors->has('confirm_password'))
-                    <span id="confirm-password-error" class="error text-danger" for="input-confirm-password">{{ $errors->first('confirm_password') }}</span>
+                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-danger' : '' }}">
+                  <input class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="Verify Password" value="{{ old('password_confirmation') }}" required />
+                  @if ($errors->has('password_confirmation'))
+                    <span id="password-confirmation-error" class="error text-danger" for="input-password-confirmation">{{ $errors->first('password_confirmation') }}</span>
                   @endif
                 </div>
               </div>

@@ -13,11 +13,6 @@
             <p><strong>{{ __('PREMIUM FAQ') }}</strong></p>
           </a>
         </li>
-        <li class="nav-item{{ $activePage == 'about_us' ? ' active' : '' }}">
-          <a class="nav-link text-primary" href="{{ route('aboutus') }}">
-            <p><strong>{{ __('ABOUT US') }}</strong></p>
-          </a>
-        </li>
       </ul>
     </div>
     <div class="information-menu mt-2">

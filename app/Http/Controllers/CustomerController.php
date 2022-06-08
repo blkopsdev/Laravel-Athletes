@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\State;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -61,7 +64,38 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'email' => 'email|unique:customers|regex:/(.+)@(.+)\.(.+)/i|required',
+            'password' => 'required|string|min:8|confirmed'
+        ];
+
+        if(!$request->state_alt) {
+            $rules['state'] = 'required';
+        }
+
+        $this->validate($request, $rules);
+
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'state_alt' => $request->state_alt,
+            'country' => $request->country,
+            'zip' => $request->zip,
+            'username' => $request->username,
+            'password' => Hash::make($request->password)
+        ];
+
+        $customer = Customer::create($data);
+        if(!$customer) {
+            return redirect()->back()->with('error', 'Something went wrong. Please try again!');
+        }
+
+        return redirect()->back()->with('success', 'Your request has been sent successfully. Admin will contact you.');
     }
 
     /**
