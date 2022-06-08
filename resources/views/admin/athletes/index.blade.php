@@ -18,18 +18,19 @@
           <h2>{{ $title }}</h2>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-end">
-          <a href="{{ route('athletes.create') }}" class="btn btn-warning btn-rounded" rel="tooltip" data-original-title="" title="{{ __('Add') }}"><i class="material-icons mr-2">add</i>{{ __('Add') }}</a>
+          <a href="{{ route('athletes.create') }}" class="btn btn-primary btn-rounded" rel="tooltip" data-original-title="" title="{{ __('Add') }}"><i class="material-icons mr-2">add</i>{{ __('Add') }}</a>
+          <a href="{{ route('athlete_import') }}" class="btn btn-primary btn-rounded" rel="tooltip" data-original-title="" title="{{ __('Import') }}"><i class="material-icons mr-2">upload</i>{{ __('Import') }}</a>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12 col-md-12">
           <div class="card">
-            <div class="card-header card-header-warning">
-              <h4 class="card-title">{{ __('Total Athletes:') }} <strong class="text-primary">{{ number_format($total) }}</strong></h4>
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">{{ __('Total Athletes:') }} <strong class="text-white">{{ number_format($total) }}</strong></h4>
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover" id="athletes">
-                <thead class="text-warning">
+                <thead class="text-primary">
                   <th>ID</th>
                   <th>Name</th>
                   <th>City/School</th>

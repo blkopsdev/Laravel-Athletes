@@ -51,6 +51,8 @@ Route::group(['prefix' => 'premium'], function() {
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('admin_access');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@index']);
+	Route::get('/athletes/import', 'AthleteController@import')->name('athletes.import');
+	Route::post('/athletes/import', 'AthleteController@importData')->name('athletes.import');
 	Route::resource('athletes', 'AthleteController');
 	Route::resource('users', 'UserController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
