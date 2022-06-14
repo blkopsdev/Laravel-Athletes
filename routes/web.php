@@ -60,6 +60,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 	Route::resource('users', 'UserController');
 	Route::post('user/password/{id}', ['as'=>'user_password', 'uses' =>  'UserController@updatePassword']);
+
+	Route::resource('customers', 'CustomerController');
 	/* Route::group(['middleware'=>'admin_access'], function(){
 		Route::get('settings', ['as'=>'settings', 'uses'=>'DashboardController@settings']);
 		Route::post('settings', ['as'=>'update_settings', 'uses'=>'DashboardController@settingsUpdate']);

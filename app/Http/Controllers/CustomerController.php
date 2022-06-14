@@ -19,7 +19,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $title = 'Registered Visitors';
+        $total = Customer::select('id')->get()->count();
+        return view('admin.customers.index', compact('title', 'total'));
     }
 
     public function login()

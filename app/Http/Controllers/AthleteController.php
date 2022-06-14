@@ -97,10 +97,10 @@ class AthleteController extends Controller
                 $num = count($filedata);
     
                 // Skip first row (Remove below comment if you want to skip the first row)
-                if ($i == 0) {
+                /* if ($i == 0) {
                     $i++;
                     continue;
-                }
+                } */
             
                 for ($c = 0; $c < $num; $c++) {
                     $importData_arr[$i][] = $filedata[$c];
@@ -113,32 +113,63 @@ class AthleteController extends Controller
             $j = 0;
     
             foreach ($importData_arr as $importData) {
-                $name = $importData[1]; //Get user names
-                $email = $importData[3]; //Get the user emails
-                $j++;
-    
+                $token = '';
                 try {
-                    // DB::beginTransaction();
-                    /* Player::create([
-                        'name' => $importData[1],
-                        'club' => $importData[2],
-                        'email' => $importData[3],
-                        'position' => $importData[4],
-                        'age' => $importData[5],
-                        'salary' => $importData[6]
-                    ]); */
-                    
-                    //Send Email
-                    
-                } catch (\Exception $e) {
+                    if ($importData[0] != '' && $importData[0] != 'Name' && $importData[0] != NULL) {
+                        $tmp = $importData[0];
+                        $tmp .= $importData[2];
+                        $tmp .= $importData[5];
+                        $tmp .= $importData[6];
+                        $token = md5($tmp);
+                    }
+
+                    if($token != '') {
+                        $athlete = Athlete::whereToken($token)->first();
+                    }
+
+                    if (!$athlete) {
+                        $athlete = new Athlete();
+                    } 
+
+                    $athlete->name = $importData[0];
+                    $athlete->position = $importData[1];
+                    $athlete->height = $importData[2];
+                    $athlete->weight = $importData[3];
+                    $athlete->forty = $importData[4];
+                    $athlete->city_school = $importData[5];
+                    $athlete->state = $importData[6];
+                    $athlete->college_commitment = $importData[7];
+                    $athlete->synopsis = $importData[8];
+                    $athlete->national_honors = $importData[9];
+                    $athlete->other_rankings = $importData[10];
+                    $athlete->junior_local_honors = $importData[11];
+                    $athlete->sophomore_local_honors = $importData[12];
+                    $athlete->freshman_local_ranking = $importData[13];
+                    $athlete->combines = $importData[14];
+                    $athlete->other_comments = $importData[15];
+                    $athlete->news_and_notes = $importData[16];
+                    $athlete->top_offers = $importData[17];
+                    $athlete->projected_college_position = $importData[18];
+                    $athlete->national_ranking = $importData[19] == 0 || $importData[19] == '0' ? NULL : $importData[19];
+                    $athlete->state_ranking = $importData[20] == 0 || $importData[20] == '0' ? NULL : $importData[20];
+                    $athlete->rating = $importData[21];
+                    $athlete->class = $importData[22];
+                    $athlete->links = $importData[23];
+                    $athlete->contact_information = $importData[24];
+                    $athlete->token = $token;
+
+                    $athlete = $athlete->save();
+                    $j++;
+                } catch (\Throwable $th) {
                     //throw $th;
-                    
                 }
             }
     
             return response()->json([
                 'message' => "$j records successfully uploaded"
             ]);
+            
+            return redirect()->back()->with('success', $j . 'records successfully uploaded');
         } else {
             //no file was uploaded
             throw new \Exception('No file was uploaded', Response::HTTP_BAD_REQUEST);
@@ -299,7 +330,7 @@ class AthleteController extends Controller
                 $data->whereCitySchool($request->city_school);
             }
             if($request->city_school_search != null) {
-                $data->where('city_school_search', 'LIKE', '% { ' . $request->city_school_search . '} %');
+                $data->where('city_school_search', 'LIKE', '%' . $request->city_school_search . '%');
             }
 
             if($request->class != null && $request->class != 'All') {
@@ -312,7 +343,7 @@ class AthleteController extends Controller
                 $data->whereRating($request->rating);
             }
             if($request->name != null) {
-                $data->where('name', 'LIKE', '% { ' . $request->name . '} %');
+                $data->where('name', 'LIKE', '%' . $request->name . '%');
             }
 
             $user = Auth::guard('customer')->user();
@@ -346,6 +377,7 @@ class AthleteController extends Controller
         $athlete = Athlete::find($id);
         return view('athletes.show', compact('athlete'));
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -358,5 +390,31 @@ class AthleteController extends Controller
         $athlete->delete();
 
         return redirect()->route('athletes.index')->with('success', 'Customer has been deleted successfully!');
+    }
+
+    public function checkUploadedFileProperties($extension, $fileSize)
+
+    {
+
+        $valid_extension = array("csv", "xlsx"); //Only want csv and excel files
+
+        $maxFileSize = 5242880; // Uploaded file size limit is 5mb
+
+        if (in_array(strtolower($extension), $valid_extension)) {
+
+            if ($fileSize <= $maxFileSize) {
+
+            } else {
+
+                throw new \Exception('No file was uploaded', Response::HTTP_REQUEST_ENTITY_TOO_LARGE); //413 error
+
+            }
+
+        } else {
+
+            throw new \Exception('Invalid file extension', Response::HTTP_UNSUPPORTED_MEDIA_TYPE); //415 error
+
+        }
+
     }
 }

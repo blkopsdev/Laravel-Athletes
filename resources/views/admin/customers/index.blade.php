@@ -1,4 +1,4 @@
-@extends('layouts.auth.app', ['activePage' => 'athletes', 'titlePage' => __('Athletes')])
+@extends('layouts.auth.app', ['activePage' => 'customers.index', 'titlePage' => __('Visitors')])
 
 @section('content')
   <div class="content">
@@ -8,7 +8,7 @@
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">{{ __('Dashboard') }}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{ __('Athletes') }}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ __('Visitors') }}</li>
             </ol>
           </nav>
         </div>
@@ -16,10 +16,6 @@
       <div class="row">
         <div class="col-md-6">
           <h2>{{ $title }}</h2>
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-end">
-          <a href="{{ route('athletes.create') }}" class="btn btn-primary btn-rounded" rel="tooltip" data-original-title="" title="{{ __('Add') }}"><i class="material-icons mr-2">add</i>{{ __('Add') }}</a>
-          <a href="{{ route('athletes.import') }}" class="btn btn-primary btn-rounded" rel="tooltip" data-original-title="" title="{{ __('Import') }}"><i class="material-icons mr-2">upload</i>{{ __('Import') }}</a>
         </div>
       </div>
       <div class="row">

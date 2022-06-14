@@ -45,6 +45,31 @@
         </a>
       </li>
 
+      <li class="nav-item {{ str_contains($activePage, 'visitors') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#visitor_management" aria-expanded="true">
+          <i class="material-icons">workspace_premium</i>
+          <p>{{ __('Visitor Management') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="visitor_management">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'visitors.approved' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('customers.index') }}">
+                <i class="material-icons">how_to_reg</i>
+                <span class="sidebar-normal">{{ __('Approved') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'visitors.approved' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('customers.index') }}">
+                <i class="material-icons">pending</i>
+                <span class="sidebar-normal">{{ __('Pending Approval') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">group</i>

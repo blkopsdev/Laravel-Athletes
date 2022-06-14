@@ -18,35 +18,31 @@
 
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <form class="form" method="POST" action="{{ route('athletes.import') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="card ">
-                        <div class="card-header card-header-primary">
-                            <h4 class="card-title">{{ $title }}</h4>
-                            {{-- <p class="card-category"></p> --}}
-                        </div>
-                        <div class="card-body ">
+                <div class="card ">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">{{ $title }}</h4>
+                        {{-- <p class="card-category"></p> --}}
+                    </div>
+                    <div class="card-body ">
+                        <form class="form" method="POST" action="{{ route('athletes.import') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 py-3">
                                     <!-- Basic Bootstrap File Input -->
-                                    <div class="input-group my-3">
-                                        <div class="input-group-prepend">
-                                          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                                        </div>
-                                        <div class="custom-file">
-                                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                        </div>
-                                      </div>
-                                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                    <input type="file" name="file" id="file">
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer ml-auto mr-auto">
-                            
-                        </div>
+                                
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                    <div class="card-footer ml-auto mr-auto">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
