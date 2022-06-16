@@ -1,4 +1,4 @@
-@extends('layouts.auth.app', ['activePage' => 'customers.index', 'titlePage' => __('Visitors')])
+@extends('layouts.auth.app', ['activePage' => 'customers.denied', 'titlePage' => __('Access Denied Visitors')])
 
 @section('content')
   <div class="content">

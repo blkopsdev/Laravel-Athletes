@@ -26,7 +26,8 @@
               <div class="card-icon">
                 <i class="material-icons">access_time</i>
               </div>
-              <p class="card-category">Today's Transactions</p>
+              <p class="card-category">Approved Visitors</p>
+              <h3 class="card-title">{{ number_format($customers) }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">

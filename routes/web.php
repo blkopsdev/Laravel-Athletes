@@ -61,7 +61,10 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::resource('users', 'UserController');
 	Route::post('user/password/{id}', ['as'=>'user_password', 'uses' =>  'UserController@updatePassword']);
 
-	Route::resource('customers', 'CustomerController');
+	Route::get('approved-customers', ['as' => 'approved_customers', 'uses' => 'CustomerController@approvedIndex']);
+	Route::get('pending-customers', ['as' => 'pending_customers', 'uses' => 'CustomerController@pendingIndex']);
+	Route::get('denied-customers', ['as' => 'denied_customers', 'uses' => 'CustomerController@deniedIndex']);
+	Route::resource('customers', 'CustomerController')->except('index');
 	/* Route::group(['middleware'=>'admin_access'], function(){
 		Route::get('settings', ['as'=>'settings', 'uses'=>'DashboardController@settings']);
 		Route::post('settings', ['as'=>'update_settings', 'uses'=>'DashboardController@settingsUpdate']);
@@ -69,3 +72,4 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 });
 Route::get('athletes_ajax', 'AthleteController@getAthletes');
 Route::get('athletes_report_ajax', 'AthleteController@getReport');
+// Route::get('customers_approved_ajax', 'CustomerController@getApprovedCustomers');

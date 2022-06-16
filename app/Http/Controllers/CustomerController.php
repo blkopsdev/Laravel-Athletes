@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\Customer;
+use App\Models\StateAccess;
+use App\Models\ClassAccess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -17,11 +20,54 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /* public function index()
     {
-        $title = 'Registered Visitors';
-        $total = Customer::select('id')->get()->count();
-        return view('admin.customers.index', compact('title', 'total'));
+        $title = 'Approved Visitors';
+        $customers = Customer::select(['id', 'first_name', 'last_name', 'email', 'phone'])->whereStatus('1')->get();
+        return view('admin.customers.index', compact('title', 'customers'));
+    } */
+
+    public function approvedIndex()
+    {
+        $title = 'Approved Visitors';
+        $customers = Customer::select(['id', 'first_name', 'last_name', 'email', 'phone'])->whereStatus('1')->get();
+        return view('admin.customers.index', compact('title', 'customers'));
+    }
+
+    public function pendingIndex()
+    {
+        $title = 'Approval Pending Visitors';
+        $customers = Customer::select(['id', 'first_name', 'last_name', 'email', 'phone'])->whereStatus('0')->get();
+        return view('admin.customers.pending', compact('title', 'customers'));
+    }
+
+    public function deniedIndex()
+    {
+        $title = 'Access Denied Visitors';
+        $customers = Customer::select(['id', 'first_name', 'last_name', 'email', 'phone'])->whereStatus('2')->get();
+        return view('admin.customers.denied', compact('title', 'customers'));
+    }
+
+    public function getApprovedCustomers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::select('customers')->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actions = 
+                        '<a href="' . route('customers.show', $row->id) . '" class="btn btn-primary p-2" rel="tooltip" data-original-title="" title="View"><i class="material-icons">visibility</i></a>
+                        <a href="' . route('customers.edit', $row->id) . '" class="btn btn-warning p-2" rel="tooltip" data-original-title="" title="Edit"><i class="material-icons">edit</i></a>
+                        <form action="' . route('customers.destroy',$row->id) . '" method="POST">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger p-2" onclick="return confirm(\'Are you sure you want to permanently DELETE Customer #' . $row->id . '?\')" rel="tooltip" data-original-title="" title="Delete"><i class="material-icons">delete</i></button>
+                        </form>';
+                    return $actions;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     public function login()
@@ -108,7 +154,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::find($id);
+        $states = StateAccess::whereCustomerId($id)->first();
+        $classes = ClassAccess::whereCustomerId($id)->first();
+        return view('admin.customers.show', compact('customer', 'states', 'classes'));
     }
 
     /**
