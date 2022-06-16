@@ -82,7 +82,7 @@
                   <select class="selectpicker form-control" id="state" name="state" data-style="btn btn-primary text-white">
                     <option value="">Select State</option>
                     @foreach ($states as $state)
-                    <option value="{{ $state->state }}" {{ old('state') == $state->state ? 'selected' : '' }}>{{ $state->state }}</option>
+                    <option value="{{ $state->code }}" {{ old('state') == $state->code ? 'selected' : '' }}>{{ $state->code }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('state'))

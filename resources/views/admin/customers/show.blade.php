@@ -67,7 +67,7 @@
                       <td>{{ $customer->phone }}</td>
                     </tr>
                     <tr>
-                      <th style="min-width: 200px">Address:</th>
+                      <th style="min-width: 200px">Street Address:</th>
                       <td>{{ $customer->street }}</td>
                     </tr>
                     <tr>
@@ -80,13 +80,17 @@
                     </tr>
                     @if ($customer->state_alt != NULL)
                     <tr>
-                      <th style="min-width: 200px">State Alt:</th>
+                      <th style="min-width: 200px">State Alternative:</th>
                       <td>{{ $customer->state_alt }}</td>
                     </tr>
                     @endif
                     <tr>
-                      <th style="min-width: 200px">Zip:</th>
+                      <th style="min-width: 200px">Zip/Postal Code:</th>
                       <td>{{ $customer->zip }}</td>
+                    </tr>
+                    <tr>
+                      <th style="min-width: 200px">Country:</th>
+                      <td>{{ $customer->country }}</td>
                     </tr>
                     <tr>
                       <th></th>

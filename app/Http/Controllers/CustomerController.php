@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Athlete;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\Customer;
@@ -157,6 +158,7 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $states = StateAccess::whereCustomerId($id)->first();
         $classes = ClassAccess::whereCustomerId($id)->first();
+        
         return view('admin.customers.show', compact('customer', 'states', 'classes'));
     }
 
@@ -168,7 +170,18 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = __('Edit Customer');
+        $customer = Customer::find($id);
+
+        $states = State::select('state')->get();
+        $countries = Country::select('country')->get();
+
+        $state_access = StateAccess::whereCustomerId($id)->first();
+        $class_access = ClassAccess::whereCustomerId($id)->first();
+        
+        $available_states = Athlete::select('state')->distinct()->orderBy('state')->get();
+        $available_classes = Athlete::select('class')->distinct()->orderBy('class')->get();
+        return view('admin.customers.edit', compact('title', 'customer', 'state_access', 'class_access', 'states', 'countries'));
     }
 
     /**

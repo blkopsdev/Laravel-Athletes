@@ -87,7 +87,7 @@
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('city_school') ? ' has-danger' : '' }}">
                       <input class="form-control{{ $errors->has('city_school') ? ' is-invalid' : '' }}" name="city_school" id="input-city-school" type="text" value="{{ old('city_school', $athlete->city_school) }}" />
-                      @if ($errors->has('city-school'))
+                      @if ($errors->has('city_school'))
                         <span id="city-school-error" class="error text-danger" for="input-city-school">{{ $errors->first('city_school') }}</span>
                       @endif
                     </div>
