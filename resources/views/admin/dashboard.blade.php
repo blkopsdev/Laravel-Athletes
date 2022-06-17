@@ -71,4 +71,12 @@
 @endsection
 
 @push('js')
+<script>
+  @if(session('success'))
+      toastr.success('{{ session('success') }}', '{{ trans('app.success') }}', toastr_options);
+  @endif
+  @if(session('error'))
+      toastr.error('{{ session('error') }}', '{{ trans('app.error') }}', toastr_options);
+  @endif
+</script>
 @endpush

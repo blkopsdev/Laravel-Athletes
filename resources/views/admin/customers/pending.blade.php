@@ -27,6 +27,7 @@
             <div class="card-body table-responsive">
               <table class="table table-hover" id="customers">
                 <thead class="text-primary">
+                  <th>ID</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Email</th>
@@ -37,6 +38,7 @@
                   @if ($customers->count() > 0)
                     @foreach ($customers as $customer)
                       <tr>
+                        <td>{{ $customer->id }}</td>
                         <td>{{ $customer->first_name }}</td>
                         <td>{{ $customer->last_name }}</td>
                         <td>{{ $customer->email }}</td>
@@ -47,7 +49,7 @@
                           <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
                           @csrf
                           <input type="hidden" name="_method" value="delete">
-                          <button type="submit" class="btn btn-danger p-2" onclick="return confirm(\'Are you sure you want to permanently DELETE Customer #{{ $customer->id }}?\')" rel="tooltip" data-original-title="" title="Delete"><i class="material-icons">delete</i></button>
+                          <button type="submit" class="btn btn-danger p-2" onclick="return confirm('Are you sure you want to permanently DELETE Customer #{{ $customer->id }}?')" rel="tooltip" data-original-title="" title="Delete"><i class="material-icons">delete</i></button>
                           </form>
                         </td>
                       </tr>  
