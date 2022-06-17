@@ -76,6 +76,13 @@
         </div>
       </li>
 
+      <li class="nav-item{{ $activePage == 'contact' ? ' active' : '' }}">
+        <a class="nav-link" href="">
+          <i class="material-icons">contact_support</i>
+          <p>{{ __('Contact') }}</p>
+        </a>
+      </li>
+
       <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
           <i class="material-icons">group</i>

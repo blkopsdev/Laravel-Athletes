@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Athlete;
 use App\Models\Customer;
+use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,9 @@ class DashboardController extends Controller
         $title = "Dashboard";
         $athletes = Athlete::select('id')->get()->count();
         $customers = Customer::whereStatus('1')->get()->count();
-        return view('admin.dashboard', compact('title', 'athletes', 'customers'));
+        $messages = Contact::orderBy('id', 'desc')->take(10)->get();
+        
+        return view('admin.dashboard', compact('title', 'athletes', 'customers', 'messages'));
     }
 
     /**
