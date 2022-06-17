@@ -1,5 +1,9 @@
 @extends('layouts.auth.app', ['activePage' => 'customers.edit', 'titlePage' => "Edit Customer"])
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-multiselect.css') }}">
+@endpush
+
 @section('content')
   <div class="content">
     <div class="container-fluid">
@@ -15,7 +19,7 @@
           </nav>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-lg-12 col-md-12">
           <form class="form" method="POST" action="{{ route('customers.update', $customer->id) }}">
@@ -27,6 +31,11 @@
                 <p class="card-category">{{ __('Customer information') }}</p>
               </div>
               <div class="card-body ">
+                <div class="row">
+                  <div class="col-md-12">
+                    @include('flash_msg')
+                  </div>
+                </div>
                 <div class="row">
                   <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('First Name') }}</label>
                   <div class="col-sm-7">
@@ -97,17 +106,6 @@
                   <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('State') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" id="input-state" type="text" value="{{ old('state', $customer->state) }}" />
-                      @if ($errors->has('state'))
-                        <span id="state-error" class="error text-danger" for="input-state">{{ $errors->first('state') }}</span>
-                      @endif
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('State') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('state') ? ' has-danger' : '' }}">
                       @php
                         $selected_state = old('state') ? old('state') : $customer->state;
                       @endphp
@@ -168,9 +166,61 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <div class="col-sm-2 d-flex align-items-center">
+                    <label>Athlete Class Access</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <select id="class_access" multiple="multiple" name="class_access[]" class="multiselect">
+                        @foreach ($available_classes as $available_class)
+                          @if ($available_class->class != '')
+                          <option 
+                            value="{{ $available_class->class }}"
+                            @if ($class_access && count($class_access) > 0)
+                            {{ in_array($available_class->class, $class_access) ? 'selected' : '' }}  
+                            @endif
+                          >
+                            {{ $available_class->class }}
+                          </option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2 d-flex align-items-center">
+                    <label>Athlete State Access</label>
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <select id="state_access" multiple="multiple" name="state_access[]" class="multiselect">
+                        @foreach ($available_states as $available_state)
+                          @if ($available_state->state != '')
+                          <option 
+                            value="{{ $available_state->state }}"
+                            @if ($state_access && count($state_access) > 0)
+                            {{ in_array($available_state->state, $state_access) ? 'selected' : '' }}  
+                            @endif
+                          >
+                            {{ $available_state->state }}
+                          </option>
+                          @endif
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                <div class="row">
+                  <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -181,22 +231,12 @@
 @endsection
 
 @push('js')
+<script src="{{ asset('assets/js/bootstrap-multiselect.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 
 <script>
   $(document).ready(function() {
-    CKEDITOR.inline('synopsis');
-    CKEDITOR.inline('national_honors');
-    CKEDITOR.inline('other_rankings');
-    CKEDITOR.inline('junior_local_honors');
-    CKEDITOR.inline('sophomore_local_honors');
-    CKEDITOR.inline('freshman_local_ranking');
-    CKEDITOR.inline('other_comments');
-    CKEDITOR.inline('news_and_notes');
-    CKEDITOR.inline('top_offers');
-    CKEDITOR.inline('links');
-    CKEDITOR.inline('contact_information');
-    CKEDITOR.inline('combines');
+    $('.multiselect').multiselect();
   })
 </script>
 <script>

@@ -173,15 +173,17 @@ class CustomerController extends Controller
         $title = __('Edit Customer');
         $customer = Customer::find($id);
 
-        $states = State::select('state')->get();
+        $states = State::select('code')->get();
         $countries = Country::select('country')->get();
 
         $state_access = StateAccess::whereCustomerId($id)->first();
+        $state_access = json_decode($state_access->state_access);
         $class_access = ClassAccess::whereCustomerId($id)->first();
+        $class_access = json_decode($class_access->class_access);
         
         $available_states = Athlete::select('state')->distinct()->orderBy('state')->get();
         $available_classes = Athlete::select('class')->distinct()->orderBy('class')->get();
-        return view('admin.customers.edit', compact('title', 'customer', 'state_access', 'class_access', 'states', 'countries'));
+        return view('admin.customers.edit', compact('title', 'customer', 'state_access', 'class_access', 'states', 'countries', 'available_states', 'available_classes'));
     }
 
     /**
@@ -193,7 +195,58 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($id);
+
+        $rules = [
+            'email' => 'email|regex:/(.+)@(.+)\.(.+)/i|required'
+        ];
+
+        if ($request->email != $customer->email) {
+            $rules['email'] = 'email|unique:customers|regex:/(.+)@(.+)\.(.+)/i|required';
+        }
+
+        if(!$request->state_alt) {
+            $rules['state'] = 'required';
+        }
+
+        $this->validate($request, $rules);
+
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'state_alt' => $request->state_alt,
+            'country' => $request->country,
+            'zip' => $request->zip
+        ];
+
+        try {
+            $customer->update($data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->message);
+        }
+
+        if($request->class_access) {
+            $class_access = ClassAccess::whereCustomerId($id)->first();
+            $class_access->update([
+                'customer_id' => $id,
+                'class_access' => json_encode($request->class_access)
+            ]);
+        }
+
+        if ($request->state_access) {
+            $state_access = StateAccess::whereCustomerId($id)->first();
+            $state_access->update([
+                'customer_id' => $id,
+                'state_access' => json_encode($request->state_access)
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Customer has been updated successfully!');
     }
 
     /**

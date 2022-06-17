@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('material') }}/css/material-modal.css">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    @stack('css')
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
