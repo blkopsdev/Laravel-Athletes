@@ -1,4 +1,4 @@
-@extends('layouts.auth.app', ['activePage' => 'contact', 'titlePage' => __('Contact Messages')])
+@extends('layouts.auth.app', ['activePage' => 'contact.messages', 'titlePage' => __('Contact Messages')])
 
 @section('content')
   <div class="content">
@@ -26,7 +26,7 @@
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover" id="contact">
-                <thead class="text-warning">
+                <thead class="text-primary">
                   <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>

@@ -33,6 +33,9 @@ function unique_slug($title = '', $model = 'Project'){
 }
 
 function get_option($option_name) {
-    $option = \App\Option::whereOptionName($option_name)->first();
+    $option = \App\Models\Option::whereOptionName($option_name)->first();
+    if (!$option) {
+        return null;
+    }
     return $option->option_value;
 }

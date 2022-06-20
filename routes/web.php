@@ -67,7 +67,9 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('denied-customers', ['as' => 'denied_customers', 'uses' => 'CustomerController@deniedIndex']);
 	Route::resource('customers', 'CustomerController')->except('index');
 
-	Route::get('/contact', ['as' => 'contactlist', 'uses' => 'ContactController@index']);
+	Route::get('/contact/messages', ['as' => 'contactlist', 'uses' => 'ContactController@index']);
+	Route::get('/contact/config', ['as' => 'contact.config', 'uses' => 'ContactController@config']);
+	Route::post('/contact/config', ['as' => 'contact.config_store', 'uses' => 'ContactController@configStore']);
 	/* Route::group(['middleware'=>'admin_access'], function(){
 		Route::get('settings', ['as'=>'settings', 'uses'=>'DashboardController@settings']);
 		Route::post('settings', ['as'=>'update_settings', 'uses'=>'DashboardController@settingsUpdate']);

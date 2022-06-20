@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Option;
 use App\Models\SubmissionType;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -54,15 +55,35 @@ class ContactController extends Controller
                 ->make(true);
         }
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function config()
     {
-        //
+        $title = "Email Setting Configuration";
+
+        return view('admin.contacts.config', compact('title'));
+    }
+
+    public function configStore(Request $request)
+    {
+        foreach ($request->input() as $key => $value) {
+            if ($key != '_token') {
+                $option = Option::whereOptionName($key)->first();
+                if (!$option) {
+                    $option = new Option();
+                }
+
+                $option->option_name = $key;
+                $option->option_value = $value;
+                $option->save();
+            }
+        }
+        
+        return redirect()->back()->with('success', 'Configuration Setting has been updated!');
     }
 
     /**

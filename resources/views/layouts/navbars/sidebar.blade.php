@@ -76,11 +76,29 @@
         </div>
       </li>
 
-      <li class="nav-item{{ $activePage == 'contact' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('contactlist') }}">
+      <li class="nav-item {{ str_contains($activePage, 'contact') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#contact_management" aria-expanded="true">
           <i class="material-icons">contact_support</i>
-          <p>{{ __('Contact') }}</p>
+          <p>{{ __('Contact') }}
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse show" id="contact_management">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'contact.messages' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('contactlist') }}">
+                <i class="material-icons">comment</i>
+                <span class="sidebar-normal">{{ __('Messages') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'contact.config' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('contact.config') }}">
+                <i class="material-icons">settings</i>
+                <span class="sidebar-normal">{{ __('Configuration') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
