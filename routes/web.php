@@ -53,6 +53,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@index']);
 	Route::get('/athletes/import', 'AthleteController@import')->name('athletes.import');
 	Route::post('/athletes/import', 'AthleteController@importData')->name('athletes.import');
+
 	Route::resource('athletes', 'AthleteController');
 	Route::resource('users', 'UserController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
@@ -65,6 +66,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 	Route::get('pending-customers', ['as' => 'pending_customers', 'uses' => 'CustomerController@pendingIndex']);
 	Route::get('denied-customers', ['as' => 'denied_customers', 'uses' => 'CustomerController@deniedIndex']);
 	Route::resource('customers', 'CustomerController')->except('index');
+
+	Route::get('/contact', ['as' => 'contactlist', 'uses' => 'ContactController@index']);
 	/* Route::group(['middleware'=>'admin_access'], function(){
 		Route::get('settings', ['as'=>'settings', 'uses'=>'DashboardController@settings']);
 		Route::post('settings', ['as'=>'update_settings', 'uses'=>'DashboardController@settingsUpdate']);
@@ -72,4 +75,4 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
 });
 Route::get('athletes_ajax', 'AthleteController@getAthletes');
 Route::get('athletes_report_ajax', 'AthleteController@getReport');
-// Route::get('customers_approved_ajax', 'CustomerController@getApprovedCustomers');
+Route::get('contact_ajax', 'ContactController@getContacts');

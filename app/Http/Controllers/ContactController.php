@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\SubmissionType;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class ContactController extends Controller
 {
@@ -16,9 +18,43 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Contact Messages';
+        $total = Contact::select('id')->get()->count();
+
+        return view('admin.contacts.index', compact('title', 'total'));
     }
 
+    public function getContacts(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('contacts')->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('type', function($row){
+                    if ($row->submission_type_id == '1') {
+                        $type = "Comment";
+                    } else if ($row->submission_type_id == '2') {
+                        $type = "Suggestion";
+                    } else if ($row->submission_type_id == '3') {
+                        $type = "Question";
+                    } else if ($row->submission_type_id == '4') {
+                        $type = "Personal Appearance Inquiry";
+                    } else if ($row->submission_type_id == '5') {
+                        $type = "Site Feedback";
+                    }
+                    return $type;
+                })
+                ->rawColumns(['type'])
+                ->addIndexColumn()
+                ->addColumn('messages', function($row){
+                    $message = html_entity_decode($row->message);
+                    return $message;
+                })
+                ->rawColumns(['type', 'messages'])
+                ->make(true);
+        }
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -103,5 +139,12 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function submissionType($id)
+    {
+        $submission = SubmissionType::find($id);
+
+        return $submission->type;
     }
 }

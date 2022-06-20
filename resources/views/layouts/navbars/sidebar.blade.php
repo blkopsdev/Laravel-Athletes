@@ -77,7 +77,7 @@
       </li>
 
       <li class="nav-item{{ $activePage == 'contact' ? ' active' : '' }}">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('contactlist') }}">
           <i class="material-icons">contact_support</i>
           <p>{{ __('Contact') }}</p>
         </a>

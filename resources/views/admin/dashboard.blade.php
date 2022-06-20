@@ -52,8 +52,6 @@
                   <th>Type</th>
                   <th>Subject</th>
                   <th>Message</th>
-                  {{-- <th>Replied</th>
-                  <th>Action</th> --}}
                 </thead>
                 <tbody>
                   @foreach ($messages as $message)
@@ -64,7 +62,6 @@
                     <td>{{ $message->submissionType->type }}</td>
                     <td>{{ $message->subject }}</td>
                     <td>{!! $message->message !!}</td>
-                    {{-- <td>{{ $message->replied == 0 ? 'No' : 'Yes' }}</td> --}}
                   </tr>
                   @endforeach
                 </tbody>
