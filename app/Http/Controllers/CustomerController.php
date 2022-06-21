@@ -126,13 +126,12 @@ class CustomerController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $email = $request->email;
         $rules = [
             'password' => 'required|string|min:8|confirmed'
         ];
         $this->validate($request, $rules);
 
-        $customer = Customer::whereEmail($email)->first();
+        $customer = Customer::whereEmail($request->email)->first();
 
         $customer->password = Hash::make($request->password);
         $customer->save();
@@ -247,9 +246,13 @@ class CustomerController extends Controller
         $countries = Country::select('country')->get();
 
         $state_access = StateAccess::whereCustomerId($id)->first();
-        $state_access = json_decode($state_access->state_access);
+        if ($state_access) {
+            $state_access = json_decode($state_access->state_access);
+        }
         $class_access = ClassAccess::whereCustomerId($id)->first();
-        $class_access = json_decode($class_access->class_access);
+        if ($class_access) {
+            $class_access = json_decode($class_access->class_access);
+        }
         
         $available_states = Athlete::select('state')->distinct()->orderBy('state')->get();
         $available_classes = Athlete::select('class')->distinct()->orderBy('class')->get();
@@ -302,18 +305,24 @@ class CustomerController extends Controller
 
         if($request->class_access) {
             $class_access = ClassAccess::whereCustomerId($id)->first();
-            $class_access->update([
-                'customer_id' => $id,
-                'class_access' => json_encode($request->class_access)
-            ]);
+            if(!$class_access) {
+                $class_access = new ClassAccess();
+            }
+
+            $class_access->customer_id = $id;
+            $class_access->class_access = json_encode($request->class_access);
+            $class_access->save();
         }
 
         if ($request->state_access) {
             $state_access = StateAccess::whereCustomerId($id)->first();
-            $state_access->update([
-                'customer_id' => $id,
-                'state_access' => json_encode($request->state_access)
-            ]);
+            if(!$state_access) {
+                $state_access = new StateAccess();
+            }
+            $state_access->customer_id = $id;
+            $state_access->state_access = json_encode($request->state_access);
+            $state_access->save();
+            
         }
 
         return redirect()->back()->with('success', 'Customer has been updated successfully!');
