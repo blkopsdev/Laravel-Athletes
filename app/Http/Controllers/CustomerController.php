@@ -8,11 +8,15 @@ use App\Models\State;
 use App\Models\Customer;
 use App\Models\StateAccess;
 use App\Models\ClassAccess;
+use App\Mail\CustomerPasswordResetEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 use DB;
+use Str;
 
 class CustomerController extends Controller
 {
@@ -91,6 +95,41 @@ class CustomerController extends Controller
         Auth::guard('customer')->logout();
 
         return redirect()->route('home');
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        if (!($request->token && $request->token != null && $request->email && $request->email != null)) {
+            # code...
+            return view('customer.auth.passwords.email');
+        }
+
+        $reset_request = DB::table('password_resets')->where('email', '=', $request->email)->where('token', '=', $request->token)->first();
+
+        return;
+    }
+
+    public function passwordEmail(Request $request)
+    {
+        $email = $request->email;
+        $customer = Customer::whereEmail($email)->first();
+        if(!$customer) {
+            return redirect()->back()->with('error', 'We can\'t find a user with that email address.');
+        }
+
+        $token = hash_hmac('sha256', Str::random(40), 'secret');
+
+        $data = [
+            'email' => $email,
+            'token' => $token,
+            'created_at' => new Carbon
+        ];
+
+        // $row = DB::table('password_resets')->insert($data);
+        
+        Mail::to($email)->send(new CustomerPasswordResetEmail($token, $email));
+        
+        return redirect()->back()->with('success', 'Password reset link has been sent to your email!');
     }
 
     /**

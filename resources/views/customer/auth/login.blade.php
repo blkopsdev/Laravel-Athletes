@@ -59,7 +59,7 @@
         <div class="row">
           <div class="col-6">
               @if (Route::has('premium.password.request'))
-                  <a href="{{ route('premium.password.request') }}" class="text-light">
+                  <a href="{{ route('premium.password.request') }}" class="text-primary">
                       <small>@lang('auth.forgot_password')</small>
                   </a>
               @endif

@@ -4,7 +4,7 @@
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('password.email') }}">
+      <form class="form" method="POST" action="{{ route('premium.password.email') }}">
         @csrf
 
         <div class="card card-login card-hidden mb-3">
@@ -12,18 +12,6 @@
             <h4 class="card-title"><strong>{{ __('Forgot Password') }}</strong></h4>
           </div>
           <div class="card-body">
-            @if (session('status'))
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span>{{ session('status') }}</span>
-                  </div>
-                </div>
-              </div>
-            @endif
             <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -49,3 +37,13 @@
   </div>
 </div>
 @endsection
+@push('js')
+<script>
+  @if(session('success'))
+      toastr.success('{{ session('success') }}', '{{ trans('app.success') }}', toastr_options);
+  @endif
+  @if(session('error'))
+      toastr.error('{{ session('error') }}', '{{ trans('app.error') }}', toastr_options);
+  @endif
+</script>
+@endpush

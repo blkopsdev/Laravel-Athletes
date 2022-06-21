@@ -46,7 +46,8 @@ Route::group(['prefix' => 'premium'], function() {
 	Route::get('logout', 'CustomerController@logout')->name('premium.logout');
 });
 
-// Route::get('premium/password/reset', 'Customer/ForgetPasswordController@')->name('premium.password.request');
+Route::get('premium/password/reset', 'CustomerController@forgotPassword')->name('premium.password.request');
+Route::post('premium/password/reset', 'CustomerController@passwordEmail')->name('premium.password.email');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('admin_access');
 Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function(){
