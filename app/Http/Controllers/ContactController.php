@@ -114,7 +114,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($data);
 
-        Mail::to($request->email)->send(new ContactMail($contact));
+        Mail::to(get_option('mail_from_address'))->send(new ContactMail($contact));
         if($contact) {
             return redirect()->back()->with('success', 'Thanks for contacting us! We will be in touch with you shortly.');
         }

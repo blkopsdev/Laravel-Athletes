@@ -28,7 +28,7 @@
               </div>
               <div class="card-body table-responsive">
                 <div class="row">
-                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('Mail From Address') }}</label>
+                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('Admin Email Address') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('mail_from_address') ? ' has-danger' : '' }}">
                       <input class="form-control{{ $errors->has('mail_from_address') ? ' is-invalid' : '' }}" name="mail_from_address" id="input-mail-from-address" type="text" value="{{ old('mail_from_address', get_option('mail_from_address')) }}" placeholder="admin@recruitingbrain.com" required="true" aria-required="true"/>
