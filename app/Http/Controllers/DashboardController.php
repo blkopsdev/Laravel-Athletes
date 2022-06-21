@@ -31,9 +31,11 @@ class DashboardController extends Controller
         $title = "Dashboard";
         $athletes = Athlete::select('id')->get()->count();
         $customers = Customer::whereStatus('1')->get()->count();
+        $pending_customers = Customer::whereStatus('0')->get()->count();
+        $denied_customers = Customer::whereStatus('2')->get()->count();
         $messages = Contact::orderBy('id', 'desc')->take(10)->get();
         
-        return view('admin.dashboard', compact('title', 'athletes', 'customers', 'messages'));
+        return view('admin.dashboard', compact('title', 'athletes', 'customers', 'pending_customers', 'denied_customers', 'messages'));
     }
 
     /**

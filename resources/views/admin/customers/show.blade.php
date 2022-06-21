@@ -47,6 +47,21 @@
                       <td>{{ $customer->id }}</td>
                     </tr>
                     <tr>
+                      <th style="min-width: 200px">Visitor Access</th>
+                      <td>
+                        @php
+                          $status = "Awaiting Approval";
+                          if ($customer->status == 1) {
+                            $status = "Approved";
+                          } else if($customer->status == 2) {
+                            $status = "Denied";
+                          }
+
+                          echo $status;
+                        @endphp
+                      </td>
+                    </tr>
+                    <tr>
                       <th style="min-width: 200px">Username:</th>
                       <td>{{ $customer->username }}</td>
                     </tr>
@@ -92,10 +107,7 @@
                       <th style="min-width: 200px">Country:</th>
                       <td>{{ $customer->country }}</td>
                     </tr>
-                    <tr>
-                      <th></th>
-                      <td></td>
-                    </tr>
+                    
                     @if ($classes)
                     <tr>
                       <th style="min-width: 200px">Athlete State Access:</th>

@@ -4,7 +4,7 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-3 col-md-3 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
@@ -20,14 +20,46 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-3 col-md-3 col-sm-6">
           <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
+            <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">access_time</i>
+                <i class="material-icons">how_to_reg</i>
               </div>
               <p class="card-category">Approved Visitors</p>
               <h3 class="card-title">{{ number_format($customers) }}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">pending</i>
+              </div>
+              <p class="card-category">Pending Visitors</p>
+              <h3 class="card-title">{{ number_format($pending_customers) }}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">block</i>
+              </div>
+              <p class="card-category">Refused Visitors</p>
+              <h3 class="card-title">{{ number_format($denied_customers) }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
