@@ -13,9 +13,9 @@
               <p class="card-category">Athletes</p>
               <h3 class="card-title">{{ number_format($athletes) }}</h3>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex justify-content-end">
               <div class="stats">
-                <p></p>
+                <a href="{{ route('athletes.index') }}" class="text-right">View More</a>
               </div>
             </div>
           </div>
@@ -29,9 +29,9 @@
               <p class="card-category">Approved Visitors</p>
               <h3 class="card-title">{{ number_format($customers) }}</h3>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex justify-content-end">
               <div class="stats">
-                <p></p>
+                <a href="{{ route('approved_customers') }}" class="text-right">View More</a>
               </div>
             </div>
           </div>
@@ -45,9 +45,9 @@
               <p class="card-category">Pending Visitors</p>
               <h3 class="card-title">{{ number_format($pending_customers) }}</h3>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex justify-content-end">
               <div class="stats">
-                <p></p>
+                <a href="{{ route('pending_customers') }}" class="text-right">View More</a>
               </div>
             </div>
           </div>
@@ -61,9 +61,9 @@
               <p class="card-category">Refused Visitors</p>
               <h3 class="card-title">{{ number_format($denied_customers) }}</h3>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex justify-content-end">
               <div class="stats">
-                <p></p>
+                <a href="{{ route('denied_customers') }}" class="text-right">View More</a>
               </div>
             </div>
           </div>
