@@ -101,12 +101,43 @@ class CustomerController extends Controller
     {
         if (!($request->token && $request->token != null && $request->email && $request->email != null)) {
             # code...
-            return view('customer.auth.passwords.email');
+            return view('customer.auth.passwords.email')->with('error', 'Link is not valid.');
         }
 
         $reset_request = DB::table('password_resets')->where('email', '=', $request->email)->where('token', '=', $request->token)->first();
 
-        return;
+        $now = Carbon::now();
+        $created_at = Carbon::parse($reset_request->created_at);
+        $expiration = $created_at->addHour();
+        if($expiration->gt($now)) {
+            return redirect()->route('premium.password.reset', ['token' => $request->token, 'email' => $request->email]);
+        } else {
+            return redirect()->route('premium.password.request')->with('error', 'Password reset link is not longer valid. Please send again!');
+        }
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $token = $request->token;
+        $email = $request->email;
+
+        return view('customer.auth.passwords.reset', compact('token', 'email'));
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $email = $request->email;
+        $rules = [
+            'password' => 'required|string|min:8|confirmed'
+        ];
+        $this->validate($request, $rules);
+
+        $customer = Customer::whereEmail($email)->first();
+
+        $customer->password = Hash::make($request->password);
+        $customer->save();
+
+        return redirect()->route('premium.login')->with('success', 'Password has been updated successfully!');
     }
 
     public function passwordEmail(Request $request)
@@ -125,7 +156,7 @@ class CustomerController extends Controller
             'created_at' => new Carbon
         ];
 
-        // $row = DB::table('password_resets')->insert($data);
+        $row = DB::table('password_resets')->insert($data);
         
         Mail::to($email)->send(new CustomerPasswordResetEmail($token, $email));
         
