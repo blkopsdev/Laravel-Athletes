@@ -12,8 +12,8 @@
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">{{ __('Dashboard') }}</a></li>
-              <li class="breadcrumb-item">{{ __('customers') }}</li>
-              <li class="breadcrumb-item"><a href="{{ route('customers.show', $customer->id) }}">{{ $customer->name }}</a></li>
+              <li class="breadcrumb-item">{{ __('Customers') }}</li>
+              <li class="breadcrumb-item"><a href="{{ route('customers.show', $customer->id) }}">{{ $customer->first_name }} {{ $customer->last_name }}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{ __('Edit') }}</li>
             </ol>
           </nav>
@@ -168,7 +168,7 @@
 
                 <div class="row">
                   <div class="col-sm-2 d-flex align-items-center">
-                    <label>Athlete Class Access</label>
+                    <label for="class_access">Athlete Class Access</label>
                   </div>
                   <div class="col-sm-7">
                     <div class="form-group">
@@ -192,7 +192,7 @@
 
                 <div class="row">
                   <div class="col-sm-2 d-flex align-items-center">
-                    <label>Athlete State Access</label>
+                    <label for="state_access">Athlete State Access</label>
                   </div>
                   <div class="col-sm-7">
                     <div class="form-group">
@@ -214,6 +214,21 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('Visitor Access') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('status') ? ' has-danger' : '' }}">
+                      <select class="selectpicker form-control" id="status" name="status" data-style="btn btn-primary text-white" required>
+                        <option value="">- Select -</option>
+                        <option value="1" {{ $customer->status == 1 ? 'selected' : '' }}>Approve</option>
+                        <option value="2" {{ $customer->status == 2 ? 'selected' : '' }}>Refuse</option>
+                      </select>
+                      @if ($errors->has('status'))
+                        <span id="status-error" class="error text-danger" for="input-status">{{ $errors->first('status') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <div class="row">

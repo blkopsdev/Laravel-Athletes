@@ -294,7 +294,8 @@ class CustomerController extends Controller
             'state' => $request->state,
             'state_alt' => $request->state_alt,
             'country' => $request->country,
-            'zip' => $request->zip
+            'zip' => $request->zip,
+            'status' => $request->status
         ];
 
         try {
@@ -322,7 +323,6 @@ class CustomerController extends Controller
             $state_access->customer_id = $id;
             $state_access->state_access = json_encode($request->state_access);
             $state_access->save();
-            
         }
 
         return redirect()->back()->with('success', 'Customer has been updated successfully!');
