@@ -8,6 +8,7 @@ use App\Models\SubmissionType;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -98,7 +99,7 @@ class ContactController extends Controller
 
         $rules = [
             'name' => 'required',
-            'email' => 'email|unique:contacts|regex:/(.+)@(.+)\.(.+)/i|required'
+            'email' => 'email|regex:/(.+)@(.+)\.(.+)/i|required'
         ];
 
         $this->validate($request, $rules);
@@ -113,6 +114,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($data);
 
+        Mail::to($request->email)->send(new ContactMail($contact));
         if($contact) {
             return redirect()->back()->with('success', 'Thanks for contacting us! We will be in touch with you shortly.');
         }
