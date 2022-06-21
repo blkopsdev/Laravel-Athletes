@@ -18,15 +18,56 @@
           <h2>{{ $title }}</h2>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-12 col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title">{{ __('SMTP Configuration:') }}</h4>
+      <form class="form" method="POST" action="{{ route('contact.config_store') }}">
+        @csrf
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">{{ __('Email Configuration:') }}</h4>
+              </div>
+              <div class="card-body table-responsive">
+                <div class="row">
+                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('Mail From Address') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('mail_from_address') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('mail_from_address') ? ' is-invalid' : '' }}" name="mail_from_address" id="input-mail-from-address" type="text" value="{{ old('mail_from_address', get_option('mail_from_address')) }}" placeholder="admin@recruitingbrain.com" required="true" aria-required="true"/>
+                      @if ($errors->has('mail_from_address'))
+                        <span id="input-mail-from-address-error" class="error text-danger" for="input-input-mail-from-address">{{ $errors->first('mail_from_address') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('Mail From Name') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('mail_from_name') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('mail_from_name') ? ' is-invalid' : '' }}" name="mail_from_name" id="input-mail-from-name" type="text" value="{{ old('mail_from_name', get_option('mail_from_name')) }}" placeholder="Recruiting Brain" required="true" aria-required="true"/>
+                      @if ($errors->has('mail_from_name'))
+                        <span id="mail-from-name-error" class="error text-danger" for="input-mail-from-name">{{ $errors->first('mail_from_name') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-7 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="card-body table-responsive">
-              <form class="form" method="POST" action="{{ route('contact.config_store') }}">
-                @csrf
+          </div>
+        </div>
+      </form>
+      <form class="form" method="POST" action="{{ route('contact.config_store') }}">
+        @csrf
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">{{ __('SMTP Configuration:') }}</h4>
+              </div>
+              <div class="card-body table-responsive">
                 <div class="row">
                   <label class="col-sm-2 col-form-label d-flex align-items-center">{{ __('SMTP Host') }}</label>
                   <div class="col-sm-7">
@@ -82,16 +123,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                   <div class="col-sm-7 offset-sm-2">
                     <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 @endsection

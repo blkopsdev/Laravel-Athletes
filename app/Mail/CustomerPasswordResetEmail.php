@@ -39,7 +39,7 @@ class CustomerPasswordResetEmail extends Mailable
             'email' => $this->email,
         ]);
 
-        return $this->markdown('mails.customer_password_reset')
+        return $this->markdown('emails.customer_password_reset')
             ->subject('Reset Password Notification')
             ->with('url', $url);
             

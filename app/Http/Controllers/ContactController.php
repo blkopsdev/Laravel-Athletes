@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Option;
 use App\Models\SubmissionType;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
@@ -111,6 +112,7 @@ class ContactController extends Controller
         ];
 
         $contact = Contact::create($data);
+
         if($contact) {
             return redirect()->back()->with('success', 'Thanks for contacting us! We will be in touch with you shortly.');
         }
