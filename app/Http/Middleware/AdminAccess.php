@@ -17,7 +17,7 @@ class AdminAccess
     public function handle($request, Closure $next)
     {
         if ( !Auth::guard('web')->check()){
-            return redirect()->guest(route('login'))->with('error', trans('app.unauthorized_access'));
+            return redirect()->guest(route('login'))->with('error', 'Please login to access to this page.');
         }
 
         /* $user = Auth::user();

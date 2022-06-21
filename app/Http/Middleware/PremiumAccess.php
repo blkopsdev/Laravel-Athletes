@@ -17,7 +17,7 @@ class PremiumAccess
     public function handle($request, Closure $next)
     {
         if (!Auth::guard('customer')->check()){
-            return redirect()->guest(route('premium.login'))->with('error', trans('app.unauthorized_access'));
+            return redirect()->guest(route('premium.login'))->with('error', trans('Please login to access to this page.'));
         } else {
             $customer = Auth::guard('customer')->user();
             if ($customer->status == '0') {
