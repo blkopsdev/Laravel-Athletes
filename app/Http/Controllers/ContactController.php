@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Option;
-use App\Models\SubmissionType;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -166,10 +165,4 @@ class ContactController extends Controller
         //
     }
 
-    public function submissionType($id)
-    {
-        $submission = SubmissionType::find($id);
-
-        return $submission->type;
-    }
 }
