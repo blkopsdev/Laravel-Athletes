@@ -1,4 +1,4 @@
-@extends('layouts.auth.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'email', 'title' => __('Recruiting Brain')])
+@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'email', 'title' => __('Recruiting Brain')])
 
 @section('content')
 <div class="container" style="height: auto;">
