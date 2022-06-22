@@ -17328,6 +17328,9 @@ label {
   padding: 15px 0 5px;
   position: relative;
 }
+.card-collapse .collapse.show .card-body {
+  border-bottom: 1px solid #dddddd;
+}
 .card-collapse .card-header a i {
   float: right;
   position: relative;
