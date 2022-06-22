@@ -29,7 +29,7 @@
           <p>Numerous direct links and video links are also available for freshmen and even select junior high prospects.</p>
 
           <h4 class="text-primary">Information on a Timely Basis</h4>
-          <p>The Recruiting Brain is equipped with state-of-the-art technology and resources that enable us to both obtain and deliver value-added information, including regularly updated player rankings, on a timely basis.  </p>
+          <p><i>The Recruiting Brain</i> is equipped with state-of-the-art technology and resources that enable us to both obtain and deliver value-added information, including regularly updated player rankings, on a timely basis.  </p>
           
           <h4 class="text-primary">Reports</h4>
           <p>Timely, objective and custom-tailored rankings and reports</p>
