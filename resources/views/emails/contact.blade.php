@@ -2,6 +2,8 @@
 
 A contact request has been sent on your website:
 
+<strong>IP Address: {{ $ip }}</strong>
+
 <strong>Name:</strong> {{ $contact->name }}
 
 <strong>Mail:</strong> {{ $contact->email }}

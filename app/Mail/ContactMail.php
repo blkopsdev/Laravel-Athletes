@@ -18,9 +18,10 @@ class ContactMail extends Mailable
      *
      * @return void
      */
-    public function __construct(Contact $contact)
+    public function __construct(Contact $contact, $ip)
     {
         $this->contact = $contact;
+        $this->ip = $ip;
     }
 
     /**
@@ -32,6 +33,7 @@ class ContactMail extends Mailable
     {
         return $this->markdown('emails.contact')
             ->subject($this->contact->subject)
-            ->with('contact', $this->contact);
+            ->with('contact', $this->contact)
+            ->with('ip', $this->ip);
     }
 }

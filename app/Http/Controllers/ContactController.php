@@ -111,9 +111,11 @@ class ContactController extends Controller
             'message' => $request->message
         ];
 
+        $ip = $request->ip();
+
         $contact = Contact::create($data);
 
-        Mail::to(get_option('mail_from_address'))->send(new ContactMail($contact));
+        Mail::to(get_option('mail_from_address'))->send(new ContactMail($contact, $ip));
         if($contact) {
             return redirect()->back()->with('success', 'Thanks for contacting us! We will be in touch with you shortly.');
         }
